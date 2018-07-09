@@ -37,6 +37,7 @@ Schema:
       - Interpolation mode to apply at that point forward
       - Entry is keyframe
       - Interpolation weight
+      - Time point of entry
 
   - Event types
     - Closed caption event (608)
