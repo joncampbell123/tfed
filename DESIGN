@@ -10,6 +10,7 @@ Schema:
             - Slice envelope
             - Transformations/transitions/effects to apply to slices
               - Envelope for each transformation
+            - Overlap envelope (to apply if ONE previous slice overlaps this one)
           - Track envelope
           - Transformations/transitions/effects to apply to track
             - Envelope for each transformation
