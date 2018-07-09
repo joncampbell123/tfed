@@ -14,6 +14,7 @@ Schema:
           - Transformations/transitions/effects to apply to track
             - Envelope for each transformation
           - Mute, solo
+          - Transformations/transitions/effects to apply at that level of the track composition
         - Format change markers
           - Change frame rate, interlace, aspect ratio, sample rate, etc. at that immediate point including reset to track group
 
