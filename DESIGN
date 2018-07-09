@@ -1,0 +1,47 @@
+
+Schema:
+
+  - Project
+    - Sequence(s)
+      - Track group(s) (with track type Video, Audio, Event)
+        - Initial frame rate, interlace, aspect ratio, sample rate, etc.
+        - Tracks
+          - Slices (media cuts, from a file, sequence, generator, etc)
+            - Slice envelope
+            - Transformations/transitions/effects to apply to slices
+              - Envelope for each transformation
+          - Track envelope
+          - Transformations/transitions/effects to apply to track
+            - Envelope for each transformation
+          - Mute, solo
+        - Format change markers
+          - Change frame rate, interlace, aspect ratio, sample rate, etc. at that immediate point including reset to track group
+
+  - Envelope
+    - Parameters
+      - X, Y, scale width, scale height, scale w/h lock (X/Y as percent of frame)
+      - Video aspect ratio
+      - Rotation in degrees
+      - Opacity
+      - Playback position
+      - Zoom
+      - Crop rectangle
+      - Color(s)
+      - Volume
+      - Per-channel volume
+      - Panning
+      - Per-channel remap matrix
+      - (more, depending on transformation)
+    - Parameter entry
+      - Interpolation mode to apply at that point forward
+      - Entry is keyframe
+      - Interpolation weight
+
+  - Event types
+    - Closed caption event (608)
+    - Closed caption event (708)
+    - Subtitle event
+    - Text event
+    - MIDI event
+    - Custom event (name/value pairs)
+
