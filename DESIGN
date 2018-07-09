@@ -33,6 +33,8 @@ Schema:
       - Panning
       - Per-channel remap matrix
       - (more, depending on transformation)
+      - (more, depending on generator)
+      - Generator
     - Parameter entry
       - Interpolation mode to apply at that point forward
       - Entry is keyframe
