@@ -6,11 +6,12 @@
 
 template <class numtype> class TFRational {
 public:
+    using numType = numtype;
     using denomType = long;
 public:
     TFRational() : num(1), den(1) { };
     TFRational(const numtype &x) : num(x), den(1) { };
-    TFRational(const numtype &n,denomType &d) : num(n), den(d) { };
+    TFRational(const numtype &n,const denomType &d) : num(n), den(d) { };
     TFRational(const TFRational &x) : num(x.num), den(x.den) { };
 public:
     TFRational &operator=(const numtype &x) {

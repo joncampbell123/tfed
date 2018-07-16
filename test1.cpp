@@ -51,6 +51,22 @@ int main() {
                 std::cout << "  " << j << std::endl;
         }
     }
+    {
+        TFFloatRational x;
+        std::cout << x.value() << std::endl;
+    }
+    {
+        TFFloatRational x(2);
+        std::cout << x.value() << std::endl;
+    }
+    {
+        TFFloatRational x(3.14159);
+        std::cout << x.value() << std::endl;
+    }
+    {
+        TFFloatRational x(5,2);
+        std::cout << x.value() << std::endl;
+    }
  
     return 0;
 }
