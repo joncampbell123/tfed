@@ -4,9 +4,6 @@
 #include "tf_project.h"
 #include "tf_sequence.h"
 
-#include <map>
-#include <string>
-#include <vector>
 #include <iostream>
 
 int main() {

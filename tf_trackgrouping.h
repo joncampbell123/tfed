@@ -4,6 +4,8 @@
 
 #include "tf_mapwithrules.h"
 
+#include <vector>
+
 using TFTrackGrouping = std::vector<std::string>;
 
 using TFTrackGroupingBaseClass = TFMapWithRules< std::string, TFTrackGrouping >;

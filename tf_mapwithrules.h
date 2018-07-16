@@ -4,8 +4,6 @@
 
 #include <map>
 #include <string>
-#include <vector>
-#include <iostream>
 
 template <class keytype, class valtype> class TFMapWithRules : protected std::map< keytype, valtype* > {
 public:
