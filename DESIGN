@@ -3,6 +3,8 @@ Schema:
 
   - Project
     - Sequence(s)
+      - Track groupings
+        - Track groups to render
       - Track group(s) (with track type Video, Audio, Event)
         - Initial frame rate, interlace, aspect ratio, sample rate, etc.
         - Tracks
