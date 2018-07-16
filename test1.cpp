@@ -48,8 +48,11 @@ int main() {
         l.push_back("video2");
     }
     {
-        for (auto &i : proj.sequences["seq3"].groupings)
+        for (auto &i : proj.sequences["seq3"].groupings) {
             std::cout << "grouping: " << i.first << std::endl;
+            for (auto &j : (*i.second))
+                std::cout << "  " << j << std::endl;
+        }
     }
  
     return 0;
