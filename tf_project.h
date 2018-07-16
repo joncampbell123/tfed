@@ -2,12 +2,9 @@
 #ifndef TF_PROJECT_H
 #define TF_PROJECT_H
 
-#include <map>
-#include <string>
-#include <vector>
-#include <iostream>
-
 #include "tf_sequence.h"
+
+#include <string>
 
 class TFProject {
 public:
