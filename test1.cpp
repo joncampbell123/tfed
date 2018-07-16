@@ -45,6 +45,16 @@ int main() {
         l.push_back("video2");
     }
     {
+        TFSequence &x = proj.sequences["seq3"];
+        TFTrackGroup &g = x.groups.create("video1");
+        g.type = TFTrackGroup::VIDEO_GROUP;
+        g.rate = { 30000, 1001 };
+    }
+    {
+        std::cout << "TrackGroup video1 rate " << proj.sequences["seq3"].groups["video1"].rate << std::endl;
+        std::cout << "TrackGroup video1 rate " << proj.sequences["seq3"].groups["video1"].rate.value() << std::endl;
+    }
+    {
         for (auto &i : proj.sequences["seq3"].groupings) {
             std::cout << "grouping: " << i.first << std::endl;
             for (auto &j : (*i.second))
