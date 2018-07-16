@@ -4,6 +4,7 @@
 
 #include "tf_mapwithrules.h"
 #include "tf_trackgrouping.h"
+#include "tf_trackgroup.h"
 
 class TFSequenceList;
 
@@ -12,6 +13,7 @@ public:
                                                 TFSequence(const std::string &_name = std::string()) : name(_name) { };
     virtual                                     ~TFSequence() { };
 public:
+    TFTrackGroupList                            groups;
     TFTrackGroupingList                         groupings;
     std::string                                 name;
 protected:
