@@ -71,6 +71,10 @@ int main() {
         TFFloatRational x(7,3);
         std::cout << x.value() << " [" << x << "]" << std::endl;
     }
+    {
+        TFULongRational x(7,3);
+        std::cout << x.value() << " [" << x << "]" << std::endl;
+    }
  
     return 0;
 }
