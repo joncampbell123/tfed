@@ -33,15 +33,15 @@ public:
     virtual                                     ~TFSequenceList();
 public:
     void                                        clear(void);
-    TFSequence&                                 new_sequence(const std::string &name);
-    TFSequence&                                 get_sequence(const std::string &name);
-    TFSequenceListIterator                      find_sequence(const std::string &name);
-    void                                        delete_sequence(const std::string &name);
-    void                                        delete_sequence(TFSequenceListIterator const &i);
-    bool                                        sequence_exists(const std::string &name) const;
-    void                                        rename_sequence(const std::string &oldname,const std::string &newname);
-    TFSequenceListIterator                      begin_sequence(void);
-    TFSequenceListIterator                      end_sequence(void);
+    TFSequence&                                 create(const std::string &name);
+    TFSequence&                                 operator[](const std::string &name);
+    void                                        erase(TFSequenceListIterator const &i);
+    void                                        erase(const std::string &name);
+    void                                        rename(const std::string &oldname,const std::string &newname);
+public:
+    TFSequenceListIterator                      find(const std::string &name);
+    TFSequenceListIterator                      begin(void);
+    TFSequenceListIterator                      end(void);
 protected: /* the base class is protected */
 };
 
@@ -54,93 +54,86 @@ TFSequenceList::~TFSequenceList() {
 
 void TFSequenceList::clear(void) {
     do {
-        auto i = begin();
-        if (i == end()) break;
-        delete_sequence(i);
+        auto i = TFSequenceList::begin();
+        if (i == TFSequenceList::end()) break;
+        TFSequenceList::erase(i);
     } while (1);
 }
 
-TFSequence& TFSequenceList::new_sequence(const std::string &name) {
-    if (name.empty()) throw std::runtime_error("new_sequence: empty name");
+TFSequence& TFSequenceList::create(const std::string &name) {
+    if (name.empty()) throw std::runtime_error("create: empty name");
 
-    auto i = find(name);
-    if (i != end()) throw std::runtime_error("new_sequence: sequence already exists");
+    auto i = TFSequenceList::find(name);
+    if (i != TFSequenceList::end()) throw std::runtime_error("create: sequence already exists");
 
-    auto &ptr = operator[](name); /* poof */
+    auto &ptr = TFSequenceListBaseType::operator[](name); /* poof */
     ptr = new TFSequence(name);/* will throw exception on failure */
 
     return *ptr;
 }
 
-TFSequence& TFSequenceList::get_sequence(const std::string &name) {
-    if (name.empty()) throw std::runtime_error("get_sequence: empty name");
+TFSequence& TFSequenceList::operator[](const std::string &name) {
+    if (name.empty()) throw std::runtime_error("[]: empty name");
 
-    auto i = find(name);
-    if (i == end()) throw std::runtime_error("get_sequence: sequence does not exist");
+    auto i = TFSequenceListBaseType::find(name);
+    if (i == TFSequenceListBaseType::end()) throw std::runtime_error("[]: sequence does not exist");
 
     auto &ptr = i->second;
-    if (ptr == NULL) throw std::runtime_error("get_sequence: sequence does exist but ptr is null");
+    if (ptr == NULL) throw std::runtime_error("[]: sequence does exist but ptr is null");
 
     return *ptr;
 }
 
-TFSequenceListIterator TFSequenceList::begin_sequence(void) {
-    return begin();
+TFSequenceListIterator TFSequenceList::begin(void) {
+    return TFSequenceListBaseType::begin();
 }
 
-TFSequenceListIterator TFSequenceList::end_sequence(void) {
-    return end();
+TFSequenceListIterator TFSequenceList::end(void) {
+    return TFSequenceListBaseType::end();
 }
 
-TFSequenceListIterator TFSequenceList::find_sequence(const std::string &name) {
-    return find(name);
+TFSequenceListIterator TFSequenceList::find(const std::string &name) {
+    if (name.empty()) throw std::runtime_error("find: empty name");
+
+    return TFSequenceListBaseType::find(name);
 }
 
-void TFSequenceList::delete_sequence(const std::string &name) {
-    if (name.empty()) throw std::runtime_error("delete_sequence: empty name");
+void TFSequenceList::erase(const std::string &name) {
+    if (name.empty()) throw std::runtime_error("erase: empty name");
 
-    auto i = find(name);
-    if (i == end()) throw std::runtime_error("delete_sequence: sequence does not exist");
+    auto i = TFSequenceListBaseType::find(name);
+    if (i == TFSequenceListBaseType::end()) throw std::runtime_error("erase: sequence does not exist");
 
+    TFSequenceList::erase(i);
+}
+
+void TFSequenceList::erase(TFSequenceListIterator const &i) {
     auto &ptr = i->second;
-    if (ptr == NULL) throw std::runtime_error("delete_sequence: sequence does exist but ptr is null");
+    if (ptr == NULL) throw std::runtime_error("erase: sequence does exist but ptr is null");
     delete ptr;
 
-    erase(i);
+    TFSequenceListBaseType::erase(i);
 }
 
-void TFSequenceList::delete_sequence(TFSequenceListIterator const &i) {
-    if (i->second == NULL) throw std::runtime_error("delete_sequence: sequence with null ptr");
-    delete i->second;
-
-    erase(i);
-}
-
-bool TFSequenceList::sequence_exists(const std::string &name) const {
-    if (name.empty()) throw std::runtime_error("sequence_exists: empty name");
-
-    return find(name) != end();
-}
-
-void TFSequenceList::rename_sequence(const std::string &oldname,const std::string &newname) {
+void TFSequenceList::rename(const std::string &oldname,const std::string &newname) {
     if (oldname.empty() || newname.empty()) throw std::runtime_error("rename_sequence: empty name(s)");
 
     if (oldname != newname) {
-        auto old_i = find(oldname);
-        if (old_i == end()) throw std::runtime_error("rename_sequence: old name does not exist");
+        auto old_i = TFSequenceListBaseType::find(oldname);
+        if (old_i == TFSequenceListBaseType::end()) throw std::runtime_error("rename_sequence: old name does not exist");
 
         auto &old_p = old_i->second;
         if (old_p == NULL) throw std::runtime_error("rename_sequence: old name does exist but is null");
 
-        auto new_i = find(newname);
-        if (new_i != end()) throw std::runtime_error("rename_sequence: new name already exists");
+        auto new_i = TFSequenceListBaseType::find(newname);
+        if (new_i != TFSequenceListBaseType::end()) throw std::runtime_error("rename_sequence: new name already exists");
 
-        auto &new_p = operator[](newname);
+        auto &new_p = TFSequenceListBaseType::operator[](newname);
 
         new_p = old_p;
         new_p->name = newname;
 
-        erase(old_i);
+        TFSequenceListBaseType::erase(old_i);
     }
 }
 
@@ -163,25 +156,25 @@ int main() {
     TFProject proj("testing");
 
     {
-        TFSequence &x = proj.sequences.new_sequence("seq1");
-        TFSequence &y = proj.sequences.new_sequence("seq2");
+        TFSequence &x = proj.sequences.create("seq1");
+        TFSequence &y = proj.sequences.create("seq2");
     }
 
     {
-        TFSequence &x = proj.sequences.get_sequence("seq1");
+        TFSequence &x = proj.sequences["seq1"];
     }
 
     {
-        proj.sequences.rename_sequence("seq1","seq3");
+        proj.sequences.rename("seq1","seq3");
     }
 
     {
-        for (auto i=proj.sequences.begin_sequence();i!=proj.sequences.end_sequence();i++) {
-            std::cout << "Sequence: " << i->first << std::endl;
+        for (auto &i : proj.sequences) {
+            std::cout << "Sequence: " << i.first << std::endl;
         }
 
-        auto j=proj.sequences.find_sequence("seq2");
-        if (j != proj.sequences.end_sequence())
+        auto j = proj.sequences.find("seq2");
+        if (j != proj.sequences.end())
             std::cout << "Found: " << j->first << std::endl;
     }
 
