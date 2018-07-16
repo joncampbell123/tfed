@@ -107,12 +107,6 @@ void TFSequenceList::rename(const std::string &oldname,const std::string &newnam
     }
 }
 
-TFProject::TFProject(const std::string &_name) : name(_name) {
-}
-
-TFProject::~TFProject() {
-}
-
 int main() {
     TFProject proj("testing");
 

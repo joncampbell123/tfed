@@ -12,7 +12,7 @@ all: $(TARGET)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 test1: test1.o $(LIBS)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $<
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $< $(LIBS)
 
 clean:
 	rm -f *.o
