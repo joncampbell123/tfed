@@ -4,17 +4,17 @@
 
 #include <cmath>
 
-template <class numtype> class TFRational {
+template <class numtype,class denomtype=long> class TFRational {
 public:
     using numType = numtype;
-    using denomType = long;
+    using denomType = denomtype;
 public:
     TFRational() : num(1), den(1) { };
-    TFRational(const numtype &x) : num(x), den(1) { };
-    TFRational(const numtype &n,const denomType &d) : num(n), den(d) { };
+    TFRational(const numType &x) : num(x), den(1) { };
+    TFRational(const numType &n,const denomType &d) : num(n), den(d) { };
     TFRational(const TFRational &x) : num(x.num), den(x.den) { };
 public:
-    TFRational &operator=(const numtype &x) {
+    TFRational &operator=(const numType &x) {
         num = x;
         den = 1;
         return *this;
@@ -24,16 +24,17 @@ public:
         den = x.den;
         return *this;
     }
-    double value(void) const {
-        return num / den;
+    long double value(void) const {
+        return (long double)num / den;
     }
 public:
-    numtype                 num;
+    numType                 num;
     denomType               den;
 };
 
-typedef TFRational<double> TFFloatRational;
-typedef TFRational<long> TFLongRational;
+typedef TFRational<unsigned long,unsigned long> TFULongRational;
+typedef TFRational<double,long> TFFloatRational; /* <- reminder: x86 FILD m64int */
+typedef TFRational<long,long> TFLongRational;
 
 #endif //TF_RATIONAL_H
 
