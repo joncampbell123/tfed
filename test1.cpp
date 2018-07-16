@@ -169,13 +169,17 @@ int main() {
     }
 
     {
-        for (auto &i : proj.sequences) {
+        for (auto &i : proj.sequences)
             std::cout << "Sequence: " << i.first << std::endl;
-        }
 
         auto j = proj.sequences.find("seq2");
         if (j != proj.sequences.end())
             std::cout << "Found: " << j->first << std::endl;
+
+        proj.sequences.erase("seq2");
+
+        for (auto &i : proj.sequences)
+            std::cout << "Sequence: " << i.first << std::endl;
     }
 
     return 0;
