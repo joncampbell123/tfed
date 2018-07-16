@@ -4,7 +4,18 @@
 
 #include "tf_trackgrouping.h"
 
-class TFSequence;
+class TFSequenceList;
+
+class TFSequence {
+public:
+                                                TFSequence(const std::string &_name = std::string());
+    virtual                                     ~TFSequence();
+public:
+    TFTrackGroupingList                         groupings;
+    std::string                                 name;
+protected:
+    friend class                                TFSequenceList;
+};
 
 using TFSequenceListBaseType = std::map<std::string, TFSequence*>;
 using TFSequenceListIterator = TFSequenceListBaseType::iterator;
@@ -25,17 +36,6 @@ public:
     TFSequenceListIterator                      begin(void);
     TFSequenceListIterator                      end(void);
 protected: /* the base class is protected */
-};
-
-class TFSequence {
-public:
-                                                TFSequence(const std::string &_name = std::string());
-    virtual                                     ~TFSequence();
-public:
-    TFTrackGroupingList                         groupings;
-    std::string                                 name;
-protected:
-    friend class                                TFSequenceList;
 };
 
 #endif //TF_SEQUENCE_H
