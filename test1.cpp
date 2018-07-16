@@ -2,7 +2,9 @@
 #include <stdio.h>
 
 #include <map>
+#include <string>
 #include <vector>
+#include <iostream>
 
 class TFSequenceList;
 
@@ -33,10 +35,13 @@ public:
     void                                        clear(void);
     TFSequence&                                 new_sequence(const std::string &name);
     TFSequence&                                 get_sequence(const std::string &name);
+    TFSequenceListIterator                      find_sequence(const std::string &name);
     void                                        delete_sequence(const std::string &name);
     void                                        delete_sequence(TFSequenceListIterator const &i);
     bool                                        sequence_exists(const std::string &name) const;
     void                                        rename_sequence(const std::string &oldname,const std::string &newname);
+    TFSequenceListIterator                      begin_sequence(void);
+    TFSequenceListIterator                      end_sequence(void);
 protected: /* the base class is protected */
 };
 
@@ -77,6 +82,18 @@ TFSequence& TFSequenceList::get_sequence(const std::string &name) {
     if (ptr == NULL) throw std::runtime_error("get_sequence: sequence does exist but ptr is null");
 
     return *ptr;
+}
+
+TFSequenceListIterator TFSequenceList::begin_sequence(void) {
+    return begin();
+}
+
+TFSequenceListIterator TFSequenceList::end_sequence(void) {
+    return end();
+}
+
+TFSequenceListIterator TFSequenceList::find_sequence(const std::string &name) {
+    return find(name);
 }
 
 void TFSequenceList::delete_sequence(const std::string &name) {
@@ -156,6 +173,16 @@ int main() {
 
     {
         proj.sequences.rename_sequence("seq1","seq3");
+    }
+
+    {
+        for (auto i=proj.sequences.begin_sequence();i!=proj.sequences.end_sequence();i++) {
+            std::cout << "Sequence: " << i->first << std::endl;
+        }
+
+        auto j=proj.sequences.find_sequence("seq2");
+        if (j != proj.sequences.end_sequence())
+            std::cout << "Found: " << j->first << std::endl;
     }
 
     return 0;
