@@ -5,6 +5,7 @@
 #include "tf_mapwithrules.h"
 #include "tf_trackgrouping.h"
 #include "tf_trackgroup.h"
+#include "tf_rational.h"
 
 class TFTrackGroupList;
 
@@ -30,6 +31,7 @@ public:
     std::string                                 name;
     GroupType                                   type = NO_GROUP;
     EventType                                   eventType = NO_EVENT;
+    TFFloatRational                             rate;
 protected:
     friend class                                TFTrackGroupList;
 };
