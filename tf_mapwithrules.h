@@ -26,7 +26,8 @@ public:
     }
     virtual ValType *new_value(const KeyType &name) {
         /* override if needed */
-        return new ValType(name);
+        (void)name;
+        return new ValType();
     }
 public:
     virtual void clear(void) {

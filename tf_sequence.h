@@ -22,6 +22,10 @@ class TFSequenceList : public TFMapWithRules< std::string, TFSequence > {
 public:
                                                 TFSequenceList();
     virtual                                     ~TFSequenceList();
+public:
+    virtual ValType *new_value(const KeyType &name) {
+        return new ValType(name);
+    }
 };
 
 #endif //TF_SEQUENCE_H
