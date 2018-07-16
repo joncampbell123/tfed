@@ -3,6 +3,7 @@
 #define TF_RATIONAL_H
 
 #include <cmath>
+#include <iostream>
 
 template <class numtype,class denomtype=long> class TFRational {
 public:
@@ -31,6 +32,10 @@ public:
     numType                 num;
     denomType               den;
 };
+
+template <class numtype,class denomtype=long> std::ostream& operator<<(std::ostream& os,TFRational<numtype,denomtype> &r) {
+    return os << r.num << ":" << r.den;
+}
 
 typedef TFRational<unsigned long,unsigned long> TFULongRational;
 typedef TFRational<double,long> TFFloatRational; /* <- reminder: x86 FILD m64int */
