@@ -24,7 +24,10 @@ TFTrackGrouping& TFTrackGroupingList::create(const std::string &name) {
     auto i = TFTrackGroupingList::find(name);
     if (i != TFTrackGroupingList::end()) throw std::runtime_error("create: sequence already exists");
 
-    return TFTrackGroupingListBaseType::operator[](name); /* poof */
+    auto &ptr = TFTrackGroupingListBaseType::operator[](name); /* poof */
+    ptr = new TFTrackGrouping();/* will throw exception on failure */
+
+    return *ptr;
 }
 
 TFTrackGrouping& TFTrackGroupingList::operator[](const std::string &name) {
@@ -33,7 +36,10 @@ TFTrackGrouping& TFTrackGroupingList::operator[](const std::string &name) {
     auto i = TFTrackGroupingListBaseType::find(name);
     if (i == TFTrackGroupingListBaseType::end()) throw std::runtime_error("[]: sequence does not exist");
 
-    return i->second;
+    auto &ptr = i->second;
+    if (ptr == NULL) throw std::runtime_error("[]: sequence does exist but ptr is null");
+
+    return *ptr;
 }
 
 TFTrackGroupingListIterator TFTrackGroupingList::begin(void) {
@@ -60,6 +66,10 @@ void TFTrackGroupingList::erase(const std::string &name) {
 }
 
 void TFTrackGroupingList::erase(TFTrackGroupingListIterator const &i) {
+    auto &ptr = i->second;
+    if (ptr == NULL) throw std::runtime_error("erase: sequence does exist but ptr is null");
+    delete ptr;
+
     TFTrackGroupingListBaseType::erase(i);
 }
 
@@ -70,12 +80,15 @@ void TFTrackGroupingList::rename(const std::string &oldname,const std::string &n
         auto old_i = TFTrackGroupingListBaseType::find(oldname);
         if (old_i == TFTrackGroupingListBaseType::end()) throw std::runtime_error("rename_sequence: old name does not exist");
 
+        auto &old_p = old_i->second;
+        if (old_p == NULL) throw std::runtime_error("rename_sequence: old name does exist but is null");
+
         auto new_i = TFTrackGroupingListBaseType::find(newname);
         if (new_i != TFTrackGroupingListBaseType::end()) throw std::runtime_error("rename_sequence: new name already exists");
 
         auto &new_p = TFTrackGroupingListBaseType::operator[](newname);
 
-        new_p = old_i->second;
+        new_p = old_p;
 
         TFTrackGroupingListBaseType::erase(old_i);
     }

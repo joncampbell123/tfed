@@ -6,7 +6,7 @@
 
 using TFTrackGrouping = std::vector<std::string>;
 
-using TFTrackGroupingListBaseType = std::map<std::string, TFTrackGrouping>;
+using TFTrackGroupingListBaseType = std::map<std::string, TFTrackGrouping*>;
 
 using TFTrackGroupingListIterator = TFTrackGroupingListBaseType::iterator;
 
