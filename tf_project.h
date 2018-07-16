@@ -11,8 +11,8 @@
 
 class TFProject {
 public:
-                                                TFProject(const std::string &_name = std::string());
-    virtual                                     ~TFProject();
+                                                TFProject(const std::string &_name = std::string()) : name(_name) { };
+    virtual                                     ~TFProject() { };
 public:
     TFSequenceList                              sequences;
     std::string                                 name;
