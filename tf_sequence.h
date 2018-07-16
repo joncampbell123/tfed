@@ -7,6 +7,8 @@
 #include <vector>
 #include <iostream>
 
+class TFSequence;
+
 using TFSequenceListBaseType = std::map<std::string, TFSequence*>;
 using TFSequenceListIterator = TFSequenceListBaseType::iterator;
 

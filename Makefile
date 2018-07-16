@@ -1,5 +1,5 @@
 TARGET=test1
-LIBS=tf_project.o
+LIBS=tf_project.o tf_sequence.o
 
 CXXFLAGS=-std=gnu++11 -Wall -Wextra -pedantic
 LDFLAGS=
