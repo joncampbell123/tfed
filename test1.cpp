@@ -1,49 +1,19 @@
 
 #include <stdio.h>
 
+#include "tf_project.h"
+#include "tf_sequence.h"
+
 #include <map>
 #include <string>
 #include <vector>
 #include <iostream>
-
-class TFSequenceList;
-
-class TFSequence {
-public:
-                                                TFSequence(const std::string &_name = std::string());
-    virtual                                     ~TFSequence();
-protected:
-    std::string                                 name;
-protected:
-    friend class                                TFSequenceList;
-};
 
 TFSequence::TFSequence(const std::string &_name) : name(_name) {
 }
 
 TFSequence::~TFSequence() {
 }
-
-using TFSequenceListBaseType = std::map<std::string, TFSequence*>;
-using TFSequenceListIterator = TFSequenceListBaseType::iterator;
-
-class TFSequenceList : protected TFSequenceListBaseType {
-public:
-                                                TFSequenceList();
-    virtual                                     ~TFSequenceList();
-public:
-    void                                        clear(void);
-    TFSequence&                                 create(const std::string &name);
-    TFSequence&                                 operator[](const std::string &name);
-    void                                        erase(TFSequenceListIterator const &i);
-    void                                        erase(const std::string &name);
-    void                                        rename(const std::string &oldname,const std::string &newname);
-public:
-    TFSequenceListIterator                      find(const std::string &name);
-    TFSequenceListIterator                      begin(void);
-    TFSequenceListIterator                      end(void);
-protected: /* the base class is protected */
-};
 
 TFSequenceList::TFSequenceList() : TFSequenceListBaseType() {
 }
@@ -136,15 +106,6 @@ void TFSequenceList::rename(const std::string &oldname,const std::string &newnam
         TFSequenceListBaseType::erase(old_i);
     }
 }
-
-class TFProject {
-public:
-                                                TFProject(const std::string &_name = std::string());
-    virtual                                     ~TFProject();
-public:
-    TFSequenceList                              sequences;
-    std::string                                 name;
-};
 
 TFProject::TFProject(const std::string &_name) : name(_name) {
 }
