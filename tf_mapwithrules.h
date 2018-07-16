@@ -47,7 +47,7 @@ public:
         check_key_valid(name); /* throw exception if not */
 
         auto i = BaseType::find(name);
-        if (i != BaseType::end()) throw std::runtime_error("create: sequence already exists");
+        if (i != BaseType::end()) throw std::runtime_error("create: key already exists");
 
         auto &ptr = BaseType::operator[](name); /* poof */
         ptr = new_value(name);/* will throw exception on failure */
@@ -58,16 +58,16 @@ public:
         check_key_valid(name); /* throw exception if not */
 
         auto i = BaseType::find(name);
-        if (i == BaseType::end()) throw std::runtime_error("[]: sequence does not exist");
+        if (i == BaseType::end()) throw std::runtime_error("[]: key does not exist");
 
         auto &ptr = i->second;
-        if (ptr == NULL) throw std::runtime_error("[]: sequence does exist but ptr is null");
+        if (ptr == NULL) throw std::runtime_error("[]: key does exist but ptr is null");
 
         return *ptr;
     }
     virtual void erase(ListIterator const &i) {
         auto &ptr = i->second;
-        if (ptr == NULL) throw std::runtime_error("erase: sequence does exist but ptr is null");
+        if (ptr == NULL) throw std::runtime_error("erase: key does exist but ptr is null");
         delete ptr;
 
         BaseType::erase(i);
@@ -76,7 +76,7 @@ public:
         check_key_valid(name); /* throw exception if not */
 
         auto i = BaseType::find(name);
-        if (i == BaseType::end()) throw std::runtime_error("erase: sequence does not exist");
+        if (i == BaseType::end()) throw std::runtime_error("erase: key does not exist");
 
         SelfType::erase(i);
     }
@@ -86,13 +86,13 @@ public:
 
         if (oldname != newname) {
             auto old_i = BaseType::find(oldname);
-            if (old_i == BaseType::end()) throw std::runtime_error("rename_sequence: old name does not exist");
+            if (old_i == BaseType::end()) throw std::runtime_error("rename: old key does not exist");
 
             auto &old_p = old_i->second;
-            if (old_p == NULL) throw std::runtime_error("rename_sequence: old name does exist but is null");
+            if (old_p == NULL) throw std::runtime_error("rename: old key does exist but is null");
 
             auto new_i = BaseType::find(newname);
-            if (new_i != BaseType::end()) throw std::runtime_error("rename_sequence: new name already exists");
+            if (new_i != BaseType::end()) throw std::runtime_error("rename: new key already exists");
 
             auto &new_p = BaseType::operator[](newname);
 
