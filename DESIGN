@@ -7,19 +7,19 @@ Schema:
         - Track groups to render
       - Track group(s) (with track type Video, Audio, Event)
         - Initial frame rate, interlace, aspect ratio, sample rate, etc.
-        - Tracks
-          - Slices (media cuts, from a file, sequence, generator, etc)
-            - Slice envelope
-            - Transformations/transitions/effects to apply to slices
-              - Envelope for each transformation
-            - Overlap envelope (to apply if ONE previous slice overlaps this one)
-          - Track envelope
-          - Transformations/transitions/effects to apply to track
-            - Envelope for each transformation
-          - Mute, solo
-          - Transformations/transitions/effects to apply at that level of the track composition
-        - Format change markers
-          - Change frame rate, interlace, aspect ratio, sample rate, etc. at that immediate point including reset to track group
+        - Track group slice(s)
+          - Change frame rate, interlace, aspect ratio, sample rate, etc. for this slice
+            - Tracks
+              - Slices (media cuts, from a file, sequence, generator, etc)
+                - Slice envelope
+                - Transformations/transitions/effects to apply to slices
+                  - Envelope for each transformation
+                - Overlap envelope (to apply if ONE previous slice overlaps this one)
+              - Track envelope
+              - Transformations/transitions/effects to apply to track
+                - Envelope for each transformation
+              - Mute, solo
+              - Transformations/transitions/effects to apply at that level of the track composition
 
   - Envelope
     - Parameters
