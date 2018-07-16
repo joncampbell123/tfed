@@ -49,7 +49,7 @@ TFSequenceList::TFSequenceList() : TFSequenceListBaseType() {
 }
 
 TFSequenceList::~TFSequenceList() {
-    clear();
+    TFSequenceList::clear();
 }
 
 void TFSequenceList::clear(void) {
