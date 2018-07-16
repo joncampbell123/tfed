@@ -6,7 +6,9 @@
 
 using TFTrackGrouping = std::vector<std::string>;
 
-class TFTrackGroupingList : public TFMapWithRules< std::string, TFTrackGrouping > {
+using TFTrackGroupingBaseClass = TFMapWithRules< std::string, TFTrackGrouping >;
+
+class TFTrackGroupingList : public TFTrackGroupingBaseClass {
 public:
                                                 TFTrackGroupingList();
     virtual                                     ~TFTrackGroupingList();

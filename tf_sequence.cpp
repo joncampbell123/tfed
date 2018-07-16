@@ -3,7 +3,7 @@
 
 #include "tf_sequence.h"
 
-TFSequenceList::TFSequenceList() : TFMapWithRules< std::string, TFSequence >() {
+TFSequenceList::TFSequenceList() : TFSequenceListBaseClass() {
 }
 
 TFSequenceList::~TFSequenceList() {

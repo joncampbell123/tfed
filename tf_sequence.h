@@ -18,7 +18,9 @@ protected:
     friend class                                TFSequenceList;
 };
 
-class TFSequenceList : public TFMapWithRules< std::string, TFSequence > {
+using TFSequenceListBaseClass = TFMapWithRules< std::string, TFSequence >;
+
+class TFSequenceList : public TFSequenceListBaseClass {
 public:
                                                 TFSequenceList();
     virtual                                     ~TFSequenceList();
