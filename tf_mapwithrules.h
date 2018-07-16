@@ -9,6 +9,8 @@
 
 template <class keytype, class valtype> class TFMapWithRules : protected std::map< keytype, valtype* > {
 public:
+    using KeyType =                             keytype;
+    using ValType =                             valtype;
     using SelfType =                            TFMapWithRules<keytype, valtype>;
     typedef std::map< keytype, valtype* >       BaseType;
     typedef typename BaseType::iterator         ListIterator;
@@ -18,13 +20,13 @@ public:
         clear();
     }
 public:
-    virtual void check_key_valid(const keytype &name) {
+    virtual void check_key_valid(const KeyType &name) {
         /* default. override if needed */
         if (name.empty()) throw std::runtime_error("empty key name");
     }
-    virtual valtype *new_value(const keytype &name) {
+    virtual ValType *new_value(const KeyType &name) {
         /* override if needed */
-        return new valtype(name);
+        return new ValType(name);
     }
 public:
     void clear(void) {
