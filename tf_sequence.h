@@ -33,7 +33,6 @@ public:
     virtual                                     ~TFSequence();
 public:
     TFTrackGroupingList                         groupings;
-protected:
     std::string                                 name;
 protected:
     friend class                                TFSequenceList;
