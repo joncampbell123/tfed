@@ -42,15 +42,15 @@ TFSequence& TFSequenceList::operator[](const std::string &name) {
     return *ptr;
 }
 
-TFSequenceListIterator TFSequenceList::begin(void) {
+TFSequenceList::ListIterator TFSequenceList::begin(void) {
     return TFSequenceListBaseType::begin();
 }
 
-TFSequenceListIterator TFSequenceList::end(void) {
+TFSequenceList::ListIterator TFSequenceList::end(void) {
     return TFSequenceListBaseType::end();
 }
 
-TFSequenceListIterator TFSequenceList::find(const std::string &name) {
+TFSequenceList::ListIterator TFSequenceList::find(const std::string &name) {
     if (name.empty()) throw std::runtime_error("find: empty name");
 
     return TFSequenceListBaseType::find(name);
@@ -65,7 +65,7 @@ void TFSequenceList::erase(const std::string &name) {
     TFSequenceList::erase(i);
 }
 
-void TFSequenceList::erase(TFSequenceListIterator const &i) {
+void TFSequenceList::erase(ListIterator const &i) {
     auto &ptr = i->second;
     if (ptr == NULL) throw std::runtime_error("erase: sequence does exist but ptr is null");
     delete ptr;

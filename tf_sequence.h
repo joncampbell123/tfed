@@ -18,9 +18,10 @@ protected:
 };
 
 using TFSequenceListBaseType = std::map<std::string, TFSequence*>;
-using TFSequenceListIterator = TFSequenceListBaseType::iterator;
 
 class TFSequenceList : protected TFSequenceListBaseType {
+public:
+    using ListIterator =                        TFSequenceListBaseType::iterator;
 public:
                                                 TFSequenceList();
     virtual                                     ~TFSequenceList();
@@ -28,13 +29,13 @@ public:
     void                                        clear(void);
     TFSequence&                                 create(const std::string &name);
     TFSequence&                                 operator[](const std::string &name);
-    void                                        erase(TFSequenceListIterator const &i);
+    void                                        erase(ListIterator const &i);
     void                                        erase(const std::string &name);
     void                                        rename(const std::string &oldname,const std::string &newname);
 public:
-    TFSequenceListIterator                      find(const std::string &name);
-    TFSequenceListIterator                      begin(void);
-    TFSequenceListIterator                      end(void);
+    ListIterator                                find(const std::string &name);
+    ListIterator                                begin(void);
+    ListIterator                                end(void);
 protected: /* the base class is protected */
 };
 
