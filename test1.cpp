@@ -23,15 +23,18 @@ TFSequence::~TFSequence() {
 }
 
 using TFSequenceListBaseType = std::map<std::string, TFSequence*>;
+using TFSequenceListIterator = TFSequenceListBaseType::iterator;
 
 class TFSequenceList : protected TFSequenceListBaseType {
 public:
                                                 TFSequenceList();
     virtual                                     ~TFSequenceList();
 public:
+    void                                        clear(void);
     TFSequence&                                 new_sequence(const std::string &name);
     TFSequence&                                 get_sequence(const std::string &name);
     void                                        delete_sequence(const std::string &name);
+    void                                        delete_sequence(TFSequenceListIterator const &i);
     bool                                        sequence_exists(const std::string &name) const;
     void                                        rename_sequence(const std::string &oldname,const std::string &newname);
 protected: /* the base class is protected */
@@ -41,6 +44,15 @@ TFSequenceList::TFSequenceList() : TFSequenceListBaseType() {
 }
 
 TFSequenceList::~TFSequenceList() {
+    clear();
+}
+
+void TFSequenceList::clear(void) {
+    do {
+        auto i = begin();
+        if (i == end()) break;
+        delete_sequence(i);
+    } while (1);
 }
 
 TFSequence& TFSequenceList::new_sequence(const std::string &name) {
@@ -76,6 +88,13 @@ void TFSequenceList::delete_sequence(const std::string &name) {
     auto &ptr = i->second;
     if (ptr == NULL) throw std::runtime_error("delete_sequence: sequence does exist but ptr is null");
     delete ptr;
+
+    erase(i);
+}
+
+void TFSequenceList::delete_sequence(TFSequenceListIterator const &i) {
+    if (i->second == NULL) throw std::runtime_error("delete_sequence: sequence with null ptr");
+    delete i->second;
 
     erase(i);
 }
@@ -124,6 +143,21 @@ TFProject::~TFProject() {
 }
 
 int main() {
+    TFProject proj("testing");
+
+    {
+        TFSequence &x = proj.sequences.new_sequence("seq1");
+        TFSequence &y = proj.sequences.new_sequence("seq2");
+    }
+
+    {
+        TFSequence &x = proj.sequences.get_sequence("seq1");
+    }
+
+    {
+        proj.sequences.rename_sequence("seq1","seq3");
+    }
+
     return 0;
 }
 
