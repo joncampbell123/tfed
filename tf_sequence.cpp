@@ -7,7 +7,6 @@ TFSequenceList::TFSequenceList() : TFMapWithRules< std::string, TFSequence >() {
 }
 
 TFSequenceList::~TFSequenceList() {
-    TFSequenceList::clear();
 }
 
 /*--------------------*/

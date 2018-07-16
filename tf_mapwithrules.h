@@ -24,6 +24,12 @@ public:
         /* default. override if needed */
         if (name.empty()) throw std::runtime_error("empty key name");
     }
+    virtual void change_key_name(const KeyType &oldname,const KeyType &newname,ValType &value) {
+        /* override if needed */
+        (void)oldname;
+        (void)newname;
+        (void)value;
+    }
     virtual ValType *new_value(const KeyType &name) {
         /* override if needed */
         (void)name;
@@ -91,7 +97,7 @@ public:
             auto &new_p = BaseType::operator[](newname);
 
             new_p = old_p;
-            new_p->name = newname;
+            change_key_name(oldname, newname, *new_p);
 
             BaseType::erase(old_i);
         }

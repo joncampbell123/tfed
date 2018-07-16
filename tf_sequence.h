@@ -26,6 +26,10 @@ public:
     virtual ValType *new_value(const KeyType &name) {
         return new ValType(name);
     }
+    virtual void change_key_name(const KeyType &oldname,const KeyType &newname,ValType &value) {
+        (void)oldname;
+        value.name = newname;
+    }
 };
 
 #endif //TF_SEQUENCE_H

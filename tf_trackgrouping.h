@@ -1,29 +1,16 @@
 
-#include <map>
-#include <string>
-#include <vector>
-#include <iostream>
+#ifndef TF_TRACKGROUPING_H
+#define TF_TRACKGROUPING_H
+
+#include "tf_mapwithrules.h"
 
 using TFTrackGrouping = std::vector<std::string>;
 
-using TFTrackGroupingListBaseType = std::map<std::string, TFTrackGrouping*>;
-
-using TFTrackGroupingListIterator = TFTrackGroupingListBaseType::iterator;
-
-class TFTrackGroupingList : protected TFTrackGroupingListBaseType {
+class TFTrackGroupingList : public TFMapWithRules< std::string, TFTrackGrouping > {
 public:
-                                            TFTrackGroupingList();
-    virtual                                 ~TFTrackGroupingList();
-public:
-    void                                    clear(void);
-    TFTrackGrouping&                        create(const std::string &name);
-    TFTrackGrouping&                        operator[](const std::string &name);
-    void                                    erase(TFTrackGroupingListIterator const &i);
-    void                                    rename(const std::string &oldname,const std::string &newname);
-    void                                    erase(const std::string &name);
-    TFTrackGroupingListIterator             find(const std::string &name);
-    TFTrackGroupingListIterator             begin(void);
-    TFTrackGroupingListIterator             end(void);
-protected:/* base class */
+                                                TFTrackGroupingList();
+    virtual                                     ~TFTrackGroupingList();
 };
+
+#endif //TF_TRACKGROUPING_H
 
