@@ -1,6 +1,12 @@
 
 Schema:
 
+  - Rational (fraction)
+    - Floating point numerator
+    - Integer denominator
+  - Mixed fraction type
+    - Rational with whole number (integer)
+
   - Project
     - Sequence(s)
       - Track groupings
