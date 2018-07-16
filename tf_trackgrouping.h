@@ -10,8 +10,8 @@ using TFTrackGroupingBaseClass = TFMapWithRules< std::string, TFTrackGrouping >;
 
 class TFTrackGroupingList : public TFTrackGroupingBaseClass {
 public:
-                                                TFTrackGroupingList();
-    virtual                                     ~TFTrackGroupingList();
+                                                TFTrackGroupingList() : TFTrackGroupingBaseClass() { };
+    virtual                                     ~TFTrackGroupingList() { };
 };
 
 #endif //TF_TRACKGROUPING_H

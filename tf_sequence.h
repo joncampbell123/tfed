@@ -9,8 +9,8 @@ class TFSequenceList;
 
 class TFSequence {
 public:
-                                                TFSequence(const std::string &_name = std::string());
-    virtual                                     ~TFSequence();
+                                                TFSequence(const std::string &_name = std::string()) : name(_name) { };
+    virtual                                     ~TFSequence() { };
 public:
     TFTrackGroupingList                         groupings;
     std::string                                 name;
@@ -22,8 +22,8 @@ using TFSequenceListBaseClass = TFMapWithRules< std::string, TFSequence >;
 
 class TFSequenceList : public TFSequenceListBaseClass {
 public:
-                                                TFSequenceList();
-    virtual                                     ~TFSequenceList();
+                                                TFSequenceList() : TFSequenceListBaseClass() { };
+    virtual                                     ~TFSequenceList() { };
 public:
     virtual ValType *new_value(const KeyType &name) {
         return new ValType(name);

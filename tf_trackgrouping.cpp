@@ -3,9 +3,3 @@
 
 #include "tf_trackgrouping.h"
 
-TFTrackGroupingList::TFTrackGroupingList() : TFTrackGroupingBaseClass()  {
-}
-
-TFTrackGroupingList::~TFTrackGroupingList() {
-}
-
