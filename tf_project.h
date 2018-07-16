@@ -7,9 +7,6 @@
 #include <vector>
 #include <iostream>
 
-class TFSequence;
-class TFSequenceList;
-
 #include "tf_sequence.h"
 
 class TFProject {
