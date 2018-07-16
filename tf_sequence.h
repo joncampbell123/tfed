@@ -2,10 +2,7 @@
 #ifndef TF_SEQUENCE_H
 #define TF_SEQUENCE_H
 
-#include <map>
-#include <string>
-#include <vector>
-#include <iostream>
+#include "tf_trackgrouping.h"
 
 class TFSequence;
 
@@ -34,6 +31,8 @@ class TFSequence {
 public:
                                                 TFSequence(const std::string &_name = std::string());
     virtual                                     ~TFSequence();
+public:
+    TFTrackGroupingList                         groupings;
 protected:
     std::string                                 name;
 protected:
