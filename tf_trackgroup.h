@@ -10,10 +10,26 @@ class TFTrackGroupList;
 
 class TFTrackGroup {
 public:
+    enum GroupType {
+        NO_GROUP=0,
+        AUDIO_GROUP,
+        VIDEO_GROUP,
+        EVENT_GROUP
+    };
+    enum EventType {
+        NO_EVENT=0,
+        CAPTION_EVENT,
+        SUBTITLE_EVENT,
+        MIDI_EVENT,
+        TRIGGER_EVENT
+    };
+public:
                                                 TFTrackGroup(const std::string &_name = std::string()) : name(_name) { };
     virtual                                     ~TFTrackGroup() { };
 public:
     std::string                                 name;
+    GroupType                                   type = NO_GROUP;
+    EventType                                   eventType = NO_EVENT;
 protected:
     friend class                                TFTrackGroupList;
 };
