@@ -29,14 +29,14 @@ public:
         return new ValType(name);
     }
 public:
-    void clear(void) {
+    virtual void clear(void) {
         do {
             auto i = SelfType::begin();
             if (i == SelfType::end()) break;
             SelfType::erase(i);
         } while (1);
     }
-    valtype& create(const keytype &name) {
+    virtual valtype& create(const keytype &name) {
         check_key_valid(name); /* throw exception if not */
 
         auto i = BaseType::find(name);
@@ -47,7 +47,7 @@ public:
 
         return *ptr;
     }
-    valtype& operator[](const keytype &name) {
+    virtual valtype& operator[](const keytype &name) {
         check_key_valid(name); /* throw exception if not */
 
         auto i = BaseType::find(name);
@@ -58,14 +58,14 @@ public:
 
         return *ptr;
     }
-    void erase(ListIterator const &i) {
+    virtual void erase(ListIterator const &i) {
         auto &ptr = i->second;
         if (ptr == NULL) throw std::runtime_error("erase: sequence does exist but ptr is null");
         delete ptr;
 
         BaseType::erase(i);
     }
-    void erase(const keytype &name) {
+    virtual void erase(const keytype &name) {
         check_key_valid(name); /* throw exception if not */
 
         auto i = BaseType::find(name);
@@ -73,7 +73,7 @@ public:
 
         SelfType::erase(i);
     }
-    void rename(const keytype &oldname,const keytype &newname) {
+    virtual void rename(const keytype &oldname,const keytype &newname) {
         check_key_valid(oldname);
         check_key_valid(newname);
 
