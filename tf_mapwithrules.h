@@ -93,8 +93,8 @@ public:
             if (new_i != BaseType::end()) throw std::runtime_error("rename: new key already exists");
 
             auto &new_p = BaseType::operator[](newname);
-
             new_p = old_p;
+
             change_key_name(oldname, newname, *new_p);
 
             BaseType::erase(old_i);
