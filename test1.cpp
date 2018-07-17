@@ -128,6 +128,9 @@ int main() {
 
         g.video.set_pixel_aspect_ratio({1,1});/*should result in DAR 4:1 PAR 1:1 */
         std::cout << g.rate.value() << " [" << g.rate << "] " << g.video.width << "x" << g.video.height << " PAR " << g.video.pixel_aspect_ratio << " DAR " << g.video.display_aspect_ratio << std::endl;
+
+        g.video.setDimensions(1920,1080);/*should result in DAR 16:9 PAR 1:1 */
+        std::cout << g.rate.value() << " [" << g.rate << "] " << g.video.width << "x" << g.video.height << " PAR " << g.video.pixel_aspect_ratio << " DAR " << g.video.display_aspect_ratio << std::endl;
     }
  
     return 0;
