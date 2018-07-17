@@ -14,8 +14,14 @@ enum FieldOrder {
     INTERLACED_BOTTOM_FIRST
 };
 
+class AudioDescription {
+public:/*sample rate is in parent object "rate"*/
+    unsigned int                            channel_count = 2;
+    double                                  volume = 1.0;
+};
+
 class VideoDescription {
-public:
+public:/*field/frame rate is in parent object "rate" */
     FieldOrder                              field_order = PROGRESSIVE_ORDER;
     unsigned int                            field_duration = 1;             /* video "ticks" per field/frame */
     TFULongRational                         display_aspect_ratio = { 16, 9 };
