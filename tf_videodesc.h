@@ -5,6 +5,7 @@
 #include "tf_rational.h"
 
 enum FieldOrder {
+    NO_ORDER=-1,
     PROGRESSIVE_ORDER=0,
     INTERLACED_TOP_FIRST,
     INTERLACED_BOTTOM_FIRST
@@ -54,6 +55,25 @@ public:
         pixel_aspect_ratio.den = (display_aspect_ratio.den * width);
 
         pixel_aspect_ratio.reduce();
+    }
+};
+
+class VideoDescriptionOverride {
+public:
+    FieldOrder                              field_order = NO_ORDER;
+    unsigned int                            field_duration = 0;
+    TFULongRational                         display_aspect_ratio = { 0 };
+    TFULongRational                         pixel_aspect_ratio = { 0 };
+    unsigned int                            width = 0, height = 0;
+public:
+    VideoDescription apply(VideoDescription parent) {
+        if (field_order > NO_ORDER) parent.field_order = field_order;
+        if (field_duration > 0) parent.field_duration = field_duration;
+        if (display_aspect_ratio.num > 0) parent.display_aspect_ratio = display_aspect_ratio;
+        if (pixel_aspect_ratio.num > 0) parent.pixel_aspect_ratio = pixel_aspect_ratio;
+        if (width > 0) parent.width = width;
+        if (height > 0) parent.height = height;
+        return parent;
     }
 };
 

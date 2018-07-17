@@ -1,0 +1,61 @@
+
+#ifndef TF_TRACKGROUP_H
+#define TF_TRACKGROUP_H
+
+#include "tf_mapwithrules.h"
+#include "tf_trackgrouping.h"
+#include "tf_trackgroup.h"
+#include "tf_rational.h"
+#include "tf_audiodesc.h"
+#include "tf_videodesc.h"
+
+class TFTrackGroupSliceList;
+
+class TFTrackGroupSlice {
+public:
+                                                TFTrackGroupSlice(const size_t &_index) : index(_index) { };
+    virtual                                     ~TFTrackGroupSlice() { };
+public:
+    size_t                                      index;
+    /* overrides */
+    TFFloatRational                             o_rate = { 0 };
+    VideoDescriptionOverride                    o_video;
+    AudioDescriptionOverride                    o_audio;
+    /* final computed... */
+    TFFloatRational rate(TFFloatRational parent) {
+        if (o_rate.num > 0) parent = o_rate;
+        return parent;
+    }
+    VideoDescription video(VideoDescription parent) {
+        o_video.apply(parent);
+        return parent;
+    }
+    AudioDescription audio(AudioDescription parent) {
+        o_audio.apply(parent);
+        return parent;
+    }
+protected:
+    friend class                                TFTrackGroupSliceList;
+};
+
+using TFTrackGroupSliceListBaseClass = TFMapWithRules< size_t, TFTrackGroupSlice >;
+
+class TFTrackGroupSliceList : public TFTrackGroupSliceListBaseClass {
+public:
+                                                TFTrackGroupSliceList() : TFTrackGroupSliceListBaseClass() { };
+    virtual                                     ~TFTrackGroupSliceList() { };
+public:
+    virtual void check_key_valid(const KeyType &name) {
+        /*...*/
+    }
+    virtual ValType *new_value(const KeyType &name) {
+        return new ValType(name);
+    }
+    virtual void change_key_name(const KeyType &oldname,const KeyType &newname,ValType &value) {
+        (void)oldname;
+        value.index = newname;
+    }
+};
+
+#endif //TF_TRACKGROUP_H
+

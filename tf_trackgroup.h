@@ -8,6 +8,7 @@
 #include "tf_rational.h"
 #include "tf_audiodesc.h"
 #include "tf_videodesc.h"
+#include "tf_trackgroupslice.h"
 
 class TFTrackGroupList;
 
