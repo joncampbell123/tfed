@@ -25,6 +25,8 @@ public:
         den = x.den;
         return *this;
     }
+    void reduce(void);
+    numType gcd(numType a,denomType b);
     long double value(void) const {
         return (long double)num / den;
     }
@@ -40,6 +42,9 @@ template <class numtype,class denomtype=long> std::ostream& operator<<(std::ostr
 typedef TFRational<unsigned long,unsigned long> TFULongRational;
 typedef TFRational<double,long> TFFloatRational; /* <- reminder: x86 FILD m64int */
 typedef TFRational<long,long> TFLongRational;
+
+template <> unsigned long TFULongRational::gcd(unsigned long u, unsigned long v);
+template <> void TFULongRational::reduce(void);
 
 #endif //TF_RATIONAL_H
 

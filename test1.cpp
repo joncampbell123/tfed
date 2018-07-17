@@ -95,7 +95,23 @@ int main() {
         std::cout << x.value() << " [" << x << "]" << std::endl;
     }
     {
-        TFULongRational x(7,3);
+        TFULongRational x(2,1);
+        x.reduce();
+        std::cout << x.value() << " [" << x << "]" << std::endl;
+    }
+    {
+        TFULongRational x(4,2);
+        x.reduce();
+        std::cout << x.value() << " [" << x << "]" << std::endl;
+    }
+    {
+        TFULongRational x(15,3);
+        x.reduce();
+        std::cout << x.value() << " [" << x << "]" << std::endl;
+    }
+    {
+        TFULongRational x(123123,123);
+        x.reduce();
         std::cout << x.value() << " [" << x << "]" << std::endl;
     }
  
