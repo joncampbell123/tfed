@@ -35,6 +35,7 @@ public:
     EventType                                   eventType = NO_EVENT;
     TFFloatRational                             rate; // video: field/frame  audio: sample rate  event: tick rate
     VideoDescription                            video;
+    AudioDescription                            audio;
 protected:
     friend class                                TFTrackGroupList;
 };
