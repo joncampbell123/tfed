@@ -114,6 +114,21 @@ int main() {
         x.reduce();
         std::cout << x.value() << " [" << x << "]" << std::endl;
     }
+    {
+        TFSequence &x = proj.sequences["seq3"];
+        TFTrackGroup &g = x.groups["video1"];
+
+        std::cout << g.rate.value() << " [" << g.rate << "] " << g.video.width << "x" << g.video.height << " PAR " << g.video.pixel_aspect_ratio << " DAR " << g.video.display_aspect_ratio << std::endl;
+
+        g.video.setDimensions(1920,480);/*should result in DAR 4:1 */
+        std::cout << g.rate.value() << " [" << g.rate << "] " << g.video.width << "x" << g.video.height << " PAR " << g.video.pixel_aspect_ratio << " DAR " << g.video.display_aspect_ratio << std::endl;
+
+        g.video.set_display_aspect_ratio({4,3});/*should result in DAR 4:3 PAR 1:3 */
+        std::cout << g.rate.value() << " [" << g.rate << "] " << g.video.width << "x" << g.video.height << " PAR " << g.video.pixel_aspect_ratio << " DAR " << g.video.display_aspect_ratio << std::endl;
+
+        g.video.set_pixel_aspect_ratio({1,1});/*should result in DAR 4:1 PAR 1:1 */
+        std::cout << g.rate.value() << " [" << g.rate << "] " << g.video.width << "x" << g.video.height << " PAR " << g.video.pixel_aspect_ratio << " DAR " << g.video.display_aspect_ratio << std::endl;
+    }
  
     return 0;
 }
