@@ -1,6 +1,6 @@
 
-#ifndef TF_TRACKGROUP_H
-#define TF_TRACKGROUP_H
+#ifndef TF_TRACKGROUPSLICE_H
+#define TF_TRACKGROUPSLICE_H
 
 #include "tf_mapwithrules.h"
 #include "tf_trackgrouping.h"
@@ -56,5 +56,5 @@ public:
     }
 };
 
-#endif //TF_TRACKGROUP_H
+#endif //TF_TRACKGROUPSLICE_H
 
