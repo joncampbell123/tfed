@@ -20,7 +20,7 @@ public:
 public:
     virtual void check_key_valid(const KeyType &name) {
         /* default. override if needed */
-        if (name.empty()) throw std::runtime_error("empty key name");
+        (void)name;
     }
     virtual void change_key_name(const KeyType &oldname,const KeyType &newname,ValType &value) {
         /* override if needed */

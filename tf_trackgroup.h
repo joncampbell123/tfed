@@ -48,6 +48,10 @@ public:
                                                 TFTrackGroupList() : TFTrackGroupListBaseClass() { };
     virtual                                     ~TFTrackGroupList() { };
 public:
+    virtual void check_key_valid(const KeyType &name) {
+        /* default. override if needed */
+        if (name.empty()) throw std::runtime_error("empty key name");
+    }
     virtual ValType *new_value(const KeyType &name) {
         return new ValType(name);
     }

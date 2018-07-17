@@ -45,9 +45,6 @@ public:
                                                 TFTrackGroupSliceList() : TFTrackGroupSliceListBaseClass() { };
     virtual                                     ~TFTrackGroupSliceList() { };
 public:
-    virtual void check_key_valid(const KeyType &name) {
-        /*...*/
-    }
     virtual ValType *new_value(const KeyType &name) {
         return new ValType(name);
     }
