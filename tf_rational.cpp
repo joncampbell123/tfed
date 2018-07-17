@@ -5,6 +5,7 @@
 
 #include "tf_rational.h"
 
+/* https://en.wikipedia.org/wiki/Binary_GCD_algorithm */
 template <> unsigned long TFULongRational::gcd(unsigned long u, unsigned long v)
 {
     // simple cases (termination)
