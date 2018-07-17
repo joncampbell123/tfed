@@ -41,7 +41,7 @@ public:
             SelfType::erase(i);
         } while (1);
     }
-    virtual valtype& create(const keytype &name) {
+    virtual ValType& create(const KeyType &name) {
         check_key_valid(name); /* throw exception if not */
 
         auto i = BaseType::find(name);
@@ -52,7 +52,7 @@ public:
 
         return *ptr;
     }
-    virtual valtype& operator[](const keytype &name) {
+    virtual ValType& operator[](const KeyType &name) {
         check_key_valid(name); /* throw exception if not */
 
         auto i = BaseType::find(name);
@@ -70,7 +70,7 @@ public:
 
         BaseType::erase(i);
     }
-    virtual void erase(const keytype &name) {
+    virtual void erase(const KeyType &name) {
         check_key_valid(name); /* throw exception if not */
 
         auto i = BaseType::find(name);
@@ -78,7 +78,7 @@ public:
 
         SelfType::erase(i);
     }
-    virtual void rename(const keytype &oldname,const keytype &newname) {
+    virtual void rename(const KeyType &oldname,const KeyType &newname) {
         check_key_valid(oldname);
         check_key_valid(newname);
 
@@ -101,7 +101,7 @@ public:
         }
     }
 public:
-    ListIterator find(const keytype &name) {
+    ListIterator find(const KeyType &name) {
         check_key_valid(name); /* throw exception if not */
 
         return BaseType::find(name);
