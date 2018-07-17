@@ -17,6 +17,8 @@ public:
     virtual                                     ~TFTrackGroupSlice() { };
 public:
     size_t                                      index;
+    double                                      start = 0;/*start time, recomputed as needed from overall slice list and ticks*/
+    double                                      end = 0;/*end time, recomputed as needed from start + ticks*/
     /* overrides */
     TFFloatRational                             o_rate = { 0 };
     VideoDescriptionOverride                    o_video;
