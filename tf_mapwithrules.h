@@ -63,12 +63,12 @@ public:
 
         return *ptr;
     }
-    virtual void erase(ListIterator const &i) {
+    virtual ListIterator erase(ListIterator const &i) {
         auto &ptr = i->second;
         if (ptr == NULL) throw std::runtime_error("erase: key does exist but ptr is null");
         delete ptr;
 
-        BaseType::erase(i);
+        return BaseType::erase(i);
     }
     virtual void erase(const KeyType &name) {
         check_key_valid(name); /* throw exception if not */
