@@ -33,15 +33,11 @@ public:
     }
     void set_display_aspect_ratio(const TFULongRational &r) {
         display_aspect_ratio = r;
-        update_pixel_aspect_ratio();
+        update_par_from_dar();
     }
     void set_pixel_aspect_ratio(const TFULongRational &r) {
         pixel_aspect_ratio = r;
-
-        display_aspect_ratio.num = (pixel_aspect_ratio.num * width);
-        display_aspect_ratio.den = (pixel_aspect_ratio.den * height);
-
-        display_aspect_ratio.reduce();
+        update_dar_from_par();
     }
     void setDimensions(unsigned int nwidth,unsigned int nheight) {
         if (nwidth == 0 || nwidth > 10000 || nheight == 0 || nheight > 10000)
@@ -49,9 +45,15 @@ public:
 
         width = nwidth;
         height = nheight;
-        update_pixel_aspect_ratio();
+        update_dar_from_par();
     }
-    void update_pixel_aspect_ratio(void) {
+    void update_dar_from_par(void) {
+        display_aspect_ratio.num = (pixel_aspect_ratio.num * width);
+        display_aspect_ratio.den = (pixel_aspect_ratio.den * height);
+
+        display_aspect_ratio.reduce();
+    }
+    void update_par_from_dar(void) {
         pixel_aspect_ratio.num = (display_aspect_ratio.num * height);
         pixel_aspect_ratio.den = (display_aspect_ratio.den * width);
 
