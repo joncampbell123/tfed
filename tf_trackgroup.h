@@ -37,6 +37,7 @@ public:
     TFFloatRational                             rate; // video: field/frame  audio: sample rate  event: tick rate
     VideoDescription                            video;
     AudioDescription                            audio;
+    TFTrackGroupSliceList                       slices;
 protected:
     friend class                                TFTrackGroupList;
 };

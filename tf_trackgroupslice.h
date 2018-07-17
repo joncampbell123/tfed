@@ -24,15 +24,15 @@ public:
     VideoDescriptionOverride                    o_video;
     AudioDescriptionOverride                    o_audio;
     /* final computed... */
-    TFFloatRational rate(TFFloatRational parent) {
+    TFFloatRational get_rate(TFFloatRational parent) {
         if (o_rate.num > 0) parent = o_rate;
         return parent;
     }
-    VideoDescription video(VideoDescription parent) {
+    VideoDescription get_video(VideoDescription parent) {
         o_video.apply(parent);
         return parent;
     }
-    AudioDescription audio(AudioDescription parent) {
+    AudioDescription get_audio(AudioDescription parent) {
         o_audio.apply(parent);
         return parent;
     }

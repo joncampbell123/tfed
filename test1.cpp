@@ -135,6 +135,25 @@ int main() {
         g.video.set_pixel_aspect_ratio({2,1});/*should result in DAR 8:1 PAR 2:1 */
         std::cout << g.rate.value() << " [" << g.rate << "] " << g.video.width << "x" << g.video.height << " PAR " << g.video.pixel_aspect_ratio << " DAR " << g.video.display_aspect_ratio << std::endl;
     }
+    {
+        TFTrackGroup &x = proj.sequences["seq3"].groups["video1"];
+        TFTrackGroupSlice &s = x.slices.create(0);
+    }
+    {
+        TFTrackGroupSlice &s = proj.sequences["seq3"].groups["video1"].slices[0];
+    }
+    {
+        TFTrackGroup &x = proj.sequences["seq3"].groups["video1"];
+        TFTrackGroupSlice &s = x.slices[0];
+        TFFloatRational nrate = s.get_rate(x.rate);
+
+        std::cout << "Slice: From " << x.rate << " to " << nrate << std::endl;
+
+        s.o_rate = { 25, 1 };
+        nrate = s.get_rate(x.rate);
+
+        std::cout << "Slice: From " << x.rate << " to " << nrate << std::endl;
+    }
  
     return 0;
 }
