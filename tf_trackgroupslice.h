@@ -16,12 +16,12 @@ public:
                                                 TFTrackGroupSlice(const size_t &_index) : index(_index) { };
     virtual                                     ~TFTrackGroupSlice() { };
 public:
+    size_t                                      index;
     unsigned long long                          length = 0;/*in ticks at rate*/
 public:
-    size_t                                      index;
     double                                      start = 0;/*start time, recomputed as needed from overall slice list and ticks*/
     double                                      end = 0;/*end time, recomputed as needed from start + ticks*/
-    TFULongRational                             rate;/*recomputed from get_rate*/
+    TFULongRational                             rate;/*recomputed from get_rate, ticks per second*/
     /* overrides */
     TFULongRational                             o_rate = { 0 };
     VideoDescriptionOverride                    o_video;
@@ -38,6 +38,29 @@ public:
     AudioDescription get_audio(AudioDescription parent) {
         o_audio.apply(parent);
         return parent;
+    }
+    void set_rate(const TFULongRational &r) {
+        if (r.num == 0 || r.den == 0) throw std::runtime_error("invalid rate");
+        rate = r;
+        update_end_time();
+    }
+    void set_length(const unsigned long long &l) {
+        if (length != l) {
+            length = l;
+            update_end_time();
+        }
+    }
+    void set_start(const double &s) {
+        if (start != s) {
+            start = s;
+            update_end_time();
+        }
+    }
+    void update_end_time(void) {
+        end = start + duration();
+    }
+    double duration(void) const {
+        return ((double)length * rate.den) / rate.num;
     }
 protected:
     friend class                                TFTrackGroupSliceList;
