@@ -34,7 +34,7 @@ public:
     std::string                                 name;
     GroupType                                   type = NO_GROUP;
     EventType                                   eventType = NO_EVENT;
-    TFFloatRational                             rate; // video: field/frame  audio: sample rate  event: tick rate
+    TFULongRational                             rate; // video: field/frame  audio: sample rate  event: tick rate
     VideoDescription                            video;
     AudioDescription                            audio;
     TFTrackGroupSliceList                       slices;

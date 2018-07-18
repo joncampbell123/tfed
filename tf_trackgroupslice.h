@@ -19,12 +19,14 @@ public:
     size_t                                      index;
     double                                      start = 0;/*start time, recomputed as needed from overall slice list and ticks*/
     double                                      end = 0;/*end time, recomputed as needed from start + ticks*/
+    unsigned long long                          length = 0;/*in ticks at rate*/
+    TFULongRational                             rate;/*recomputed from get_rate*/
     /* overrides */
-    TFFloatRational                             o_rate = { 0 };
+    TFULongRational                             o_rate = { 0 };
     VideoDescriptionOverride                    o_video;
     AudioDescriptionOverride                    o_audio;
     /* final computed... */
-    TFFloatRational get_rate(TFFloatRational parent) {
+    TFULongRational get_rate(TFULongRational parent) {
         if (o_rate.num > 0) parent = o_rate;
         return parent;
     }

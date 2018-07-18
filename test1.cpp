@@ -145,7 +145,7 @@ int main() {
     {
         TFTrackGroup &x = proj.sequences["seq3"].groups["video1"];
         TFTrackGroupSlice &s = x.slices[0];
-        TFFloatRational nrate = s.get_rate(x.rate);
+        TFULongRational nrate = s.get_rate(x.rate);
 
         std::cout << "Slice: From " << x.rate << " to " << nrate << std::endl;
 
