@@ -16,10 +16,11 @@ public:
                                                 TFTrackGroupSlice(const size_t &_index) : index(_index) { };
     virtual                                     ~TFTrackGroupSlice() { };
 public:
+    unsigned long long                          length = 0;/*in ticks at rate*/
+public:
     size_t                                      index;
     double                                      start = 0;/*start time, recomputed as needed from overall slice list and ticks*/
     double                                      end = 0;/*end time, recomputed as needed from start + ticks*/
-    unsigned long long                          length = 0;/*in ticks at rate*/
     TFULongRational                             rate;/*recomputed from get_rate*/
     /* overrides */
     TFULongRational                             o_rate = { 0 };
