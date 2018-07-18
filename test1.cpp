@@ -168,6 +168,19 @@ int main() {
 
         std::cout << "Slice: " << s.rate << " length " << s.length << " start " << s.start << " end " << s.end << std::endl;
     }
+    {
+        TFTrackGroup &x = proj.sequences["seq3"].groups["video1"];
+        TFTrackGroupSlice &s = x.slices.create(1);
+    }
+    {
+        TFTrackGroup &x = proj.sequences["seq3"].groups["video1"];
+        TFTrackGroupSlice &s = x.slices[1];
+        s.set_rate(s.get_rate(x.rate));
+        s.set_start(10);
+        s.set_length(1000);
+
+        std::cout << "Slice: " << s.rate << " length " << s.length << " start " << s.start << " end " << s.end << std::endl;
+    }
  
     return 0;
 }
