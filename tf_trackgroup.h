@@ -27,6 +27,16 @@ public:
         MIDI_EVENT,
         TRIGGER_EVENT
     };
+    class TrackListEntry {
+    public:
+        TrackListEntry() { }
+        ~TrackListEntry() { }
+    public:
+        std::string                             name;// track by name, in the group slice
+        double                                  volume = 1.0;
+        bool                                    mute = false;
+        bool                                    solo = false;
+    };
 public:
                                                 TFTrackGroup(const std::string &_name = std::string()) : name(_name) { };
     virtual                                     ~TFTrackGroup() { };
@@ -38,6 +48,7 @@ public:
     VideoDescription                            video;
     AudioDescription                            audio;
     TFTrackGroupSliceList                       slices;
+    std::vector<TrackListEntry>                 tracklist;//by name, tracks in each slice group, in render order bottom to top
 public:
     void slice_layout(TFTrackGroupSliceListBaseClass::ListIterator i) {
         long double start;
