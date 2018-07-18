@@ -20,8 +20,8 @@ public:
     unsigned long long                          length = 0;/*in ticks at rate*/
 public:
     /* start-end in SECONDS. The slice covers start <= t < end. */
-    double                                      start = 0;/*start time, recomputed as needed from overall slice list and ticks*/
-    double                                      end = 0;/*end time, recomputed as needed from start + ticks*/
+    long double                                 start = 0;/*start time, recomputed as needed from overall slice list and ticks*/
+    long double                                 end = 0;/*end time, recomputed as needed from start + ticks*/
 public:
     TFULongRational                             rate;/*recomputed from get_rate, ticks per second*/
     /* overrides */
@@ -52,7 +52,7 @@ public:
             update_end_time();
         }
     }
-    void set_start(const double &s) {
+    void set_start(const long double s) {
         if (start != s) {
             start = s;
             update_end_time();
@@ -61,8 +61,8 @@ public:
     void update_end_time(void) {
         end = start + duration();
     }
-    double duration(void) const {
-        return ((double)length * rate.den) / rate.num;
+    long double duration(void) const {
+        return ((long double)length * rate.den) / rate.num;
     }
 protected:
     friend class                                TFTrackGroupSliceList;
