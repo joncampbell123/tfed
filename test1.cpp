@@ -12,10 +12,13 @@ int main() {
     {
         TFSequence &x = proj.sequences.create("seq1");
         TFSequence &y = proj.sequences.create("seq2");
+        (void)x;
+        (void)y;
     }
 
     {
         TFSequence &x = proj.sequences["seq1"];
+        (void)x;
     }
 
     {
@@ -138,9 +141,12 @@ int main() {
     {
         TFTrackGroup &x = proj.sequences["seq3"].groups["video1"];
         TFTrackGroupSlice &s = x.slices.create(0);
+        (void)x;
+        (void)s;
     }
     {
         TFTrackGroupSlice &s = proj.sequences["seq3"].groups["video1"].slices[0];
+        (void)s;
     }
     {
         TFTrackGroup &x = proj.sequences["seq3"].groups["video1"];
@@ -171,6 +177,8 @@ int main() {
     {
         TFTrackGroup &x = proj.sequences["seq3"].groups["video1"];
         TFTrackGroupSlice &s = x.slices.create(1);
+        (void)x;
+        (void)s;
     }
     {
         TFTrackGroup &x = proj.sequences["seq3"].groups["video1"];
