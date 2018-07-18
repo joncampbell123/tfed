@@ -19,8 +19,10 @@ public:
     size_t                                      index;
     unsigned long long                          length = 0;/*in ticks at rate*/
 public:
+    /* start-end in SECONDS. The slice covers start <= t < end. */
     double                                      start = 0;/*start time, recomputed as needed from overall slice list and ticks*/
     double                                      end = 0;/*end time, recomputed as needed from start + ticks*/
+public:
     TFULongRational                             rate;/*recomputed from get_rate, ticks per second*/
     /* overrides */
     TFULongRational                             o_rate = { 0 };
