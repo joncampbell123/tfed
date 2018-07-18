@@ -13,9 +13,10 @@ Schema:
         - Track groups to render
       - Track group(s) (with track type Video, Audio, Event)
         - Initial frame rate, interlace, aspect ratio, sample rate, etc.
+        - Track list (for display) by name
         - Track group slice(s)
           - Change frame rate, interlace, aspect ratio, sample rate, etc. for this slice
-            - Tracks
+            - Tracks by name
               - Slices (media cuts, from a file, sequence, generator, etc)
                 - Slice envelope
                 - Transformations/transitions/effects to apply to slices
