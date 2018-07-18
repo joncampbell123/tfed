@@ -40,7 +40,7 @@ template <class numtype,class denomtype=long> std::ostream& operator<<(std::ostr
 }
 
 typedef TFRational<unsigned long,unsigned long> TFULongRational;
-typedef TFRational<double,long> TFFloatRational; /* <- reminder: x86 FILD m64int */
+typedef TFRational<long double,long> TFFloatRational; /* <- reminder: x86 FILD m64int */
 typedef TFRational<long,long> TFLongRational;
 
 template <> void TFULongRational::reduce(void);

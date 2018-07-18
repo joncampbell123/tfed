@@ -40,7 +40,7 @@ public:
     TFTrackGroupSliceList                       slices;
 public:
     void slice_layout(TFTrackGroupSliceListBaseClass::ListIterator i) {
-        double start;
+        long double start;
 
         if (i != slices.end()) {
             {
