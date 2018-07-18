@@ -38,6 +38,29 @@ public:
     VideoDescription                            video;
     AudioDescription                            audio;
     TFTrackGroupSliceList                       slices;
+public:
+    void slice_layout(TFTrackGroupSliceListBaseClass::ListIterator i) {
+        double start;
+
+        if (i != slices.end()) {
+            {
+                auto &ent = *(i->second);
+                ent.update_end_time();
+                start = ent.end;
+                i++;
+            }
+
+            for (;i != slices.end();i++) {
+                auto &ent = *(i->second);
+                ent.set_start(start);
+                ent.update_end_time();
+                start = ent.end;
+            }
+        }
+    }
+    void slice_layout(void) {
+        slice_layout(slices.begin());
+    }
 protected:
     friend class                                TFTrackGroupList;
 };

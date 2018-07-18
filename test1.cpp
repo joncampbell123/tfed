@@ -181,6 +181,18 @@ int main() {
 
         std::cout << "Slice: " << s.rate << " length " << s.length << " start " << s.start << " end " << s.end << std::endl;
     }
+    {
+        TFTrackGroup &x = proj.sequences["seq3"].groups["video1"];
+
+        std::cout << "layout..." << std::endl;
+        x.slice_layout();
+
+        for (auto &s : x.slices) {
+            std::cout << "Slice: " << s.second->rate << " length " <<
+                s.second->length << " start " << s.second->start << " end " <<
+                s.second->end << std::endl;
+        }
+    }
  
     return 0;
 }
