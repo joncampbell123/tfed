@@ -50,10 +50,10 @@ public:
     TFTrackGroupSliceList                       slices;
     std::vector<TrackListEntry>                 tracklist;//by name, tracks in each slice group, in render order bottom to top
 public:
-    void slice_layout(TFTrackGroupSliceListBaseClass::ListIterator i) {
+    void slice_layout(TFTrackGroupSliceListBaseClass::ListIterator i,TFTrackGroupSliceListBaseClass::ListIterator iend) {
         long double start;
 
-        if (i != slices.end()) {
+        if (i != iend) {
             {
                 auto &ent = *(i->second);
                 ent.update_end_time();
@@ -61,7 +61,7 @@ public:
                 i++;
             }
 
-            for (;i != slices.end();i++) {
+            for (;i != iend;i++) {
                 auto &ent = *(i->second);
                 ent.set_start(start);
                 ent.update_end_time();
@@ -69,8 +69,18 @@ public:
             }
         }
     }
+    void slice_layout(TFTrackGroupSliceListBaseClass::ListIterator i) {
+        slice_layout(i,slices.end());
+    }
     void slice_layout(void) {
-        slice_layout(slices.begin());
+        slice_layout(slices.begin(),slices.end());
+    }
+    void slice_layout_zero(void) {
+        auto i = slices.begin();
+        if (i != slices.end()) {
+            i->second->set_start(0);
+            slice_layout(i);
+        }
     }
 protected:
     friend class                                TFTrackGroupList;

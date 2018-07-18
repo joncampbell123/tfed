@@ -164,7 +164,7 @@ int main() {
         TFTrackGroup &x = proj.sequences["seq3"].groups["video1"];
         TFTrackGroupSlice &s = x.slices[0];
         s.set_rate(s.get_rate(x.rate));
-        s.set_start(0);
+        s.set_start(5);
         s.set_length(1000);
 
         std::cout << "Slice: " << s.rate << " length " << s.length << " start " << s.start << " end " << s.end << std::endl;
@@ -194,6 +194,18 @@ int main() {
 
         std::cout << "layout..." << std::endl;
         x.slice_layout();
+
+        for (auto &s : x.slices) {
+            std::cout << "Slice: " << s.second->rate << " length " <<
+                s.second->length << " start " << s.second->start << " end " <<
+                s.second->end << std::endl;
+        }
+    }
+    {
+        TFTrackGroup &x = proj.sequences["seq3"].groups["video1"];
+
+        std::cout << "layout..." << std::endl;
+        x.slice_layout_zero();
 
         for (auto &s : x.slices) {
             std::cout << "Slice: " << s.second->rate << " length " <<
