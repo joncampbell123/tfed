@@ -18,6 +18,9 @@ Schema:
           - Change frame rate, interlace, aspect ratio, sample rate, etc. for this slice
             - Tracks by name
               - Slices (media cuts, from a file, sequence, generator, etc)
+                - Slice start/end/duration in whole ticks only
+                - Start time of a slice is unique. Multiple slices cannot start at the same time on the same track
+                - Slice overlap is allowed only if two slices that partially overlap. Multiple overlaps not allowed
                 - Slice envelope
                 - Transformations/transitions/effects to apply to slices
                   - Envelope for each transformation
