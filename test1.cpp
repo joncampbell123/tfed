@@ -229,11 +229,34 @@ int main() {
         }
 
         {
+            TFTrackGroupSliceTrackSlice &s2 = t.slices.create(4/*ticks*/);
+            s2.set_duration(12);
+
+            std::cout << "seq3.video1.track1: start " << s2.start << " end " << s2.end << " duration " << s2.duration << std::endl;
+
+            s2.set_end(20);
+
+            std::cout << "seq3.video1.track1: start " << s2.start << " end " << s2.end << " duration " << s2.duration << std::endl;
+
+            t.slices.set_start(t.slices.find(4), 8);
+        }
+
+        {
             t.slices.set_start(t.slices.find(0), 4);
             t.slices.set_start(t.slices.find(4), 5);
             TFTrackGroupSliceTrackSlice &s2 = t.slices[5];
 
             std::cout << "seq3.video1.track1: start " << s2.start << " end " << s2.end << " duration " << s2.duration << std::endl;
+        }
+    }
+    {
+        TFTrackGroupSliceTrack &t = proj.sequences["seq3"].groups["video1"].slices[0].tracks["track1"];
+
+        std::cout << "seq3.video1.slice0.track1 slices" << std::endl;
+        for (auto &i : t.slices) {
+            std::cout << " slice " << i.first << " start " <<
+                i.second->start << " end " << i.second->end <<
+                " duration " << i.second->duration << std::endl;
         }
     }
  
