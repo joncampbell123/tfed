@@ -321,6 +321,7 @@ int main() {
         {
             proj.sequences["seq3"].groups["video1"].slices[0].tracks["track1"].slices.create(3).set_end(88);
             proj.sequences["seq3"].groups["video1"].slices[0].tracks["track1"].slices[5].set_end(40);
+            proj.sequences["seq3"].groups["video1"].slices[0].tracks["track1"].slices.create(11).set_end(38);
         }
 
         for (auto &i : t.slices) {
