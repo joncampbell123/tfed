@@ -59,6 +59,34 @@ public:
         (void)oldname;
         value.start = newname;
     }
+public:
+    void set_start(ListIterator i,long double x) {
+        if (i == end()) throw std::runtime_error("set_start on end item");
+        if (i->first != x) {
+            ListIterator j = find(x);
+            do {
+                if (j != end()) { x += 1e-100; j = find(x); }
+
+                long double tx = x;
+
+                if (j != end()) { x += 1e-99; j = find(x); }
+                if (j != end()) { x += 1e-97; j = find(x); }
+                if (j != end()) { x += 1e-81; j = find(x); }
+                if (j != end()) { x += 1e-56; j = find(x); }
+                if (j != end()) { x += 1e-33; j = find(x); }
+                if (j != end()) { x += 1e-15; j = find(x); }
+                if (j != end()) { x += 1e-8; j = find(x); }
+                if (j != end()) { x += 1e-3; j = find(x); }
+
+                if (j != end())
+                    x = tx;
+                else
+                    break;
+            } while (1);
+
+            rename(i->first, x);
+        }
+    }
 };
 
 #endif //TF_TRACKGROUPSLICETRACK_H
