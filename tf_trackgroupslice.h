@@ -48,6 +48,7 @@ public:
         if (r.num == 0 || r.den == 0) throw std::runtime_error("invalid rate");
         rate = r;
         update_end_time();
+        update_track_rates();
     }
     void set_length(const unsigned long long &l) {
         if (length != l) {
@@ -72,6 +73,10 @@ public:
     }
     long double seconds2ticks(const long double &x) const {
         return ((long double)x * rate.num) / rate.den;
+    }
+    void update_track_rates(void) {
+        for (auto &i : tracks)
+            i.second->set_rate(rate);
     }
 protected:
     friend class                                TFTrackGroupSliceList;
