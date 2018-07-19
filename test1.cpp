@@ -213,6 +213,9 @@ int main() {
                 s.second->end << std::endl;
         }
     }
+    {
+        TFTrackGroupSlice &s = proj.sequences["seq3"].groups["video1"].slices[0];
+    }
  
     return 0;
 }
