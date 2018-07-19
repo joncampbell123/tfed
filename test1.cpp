@@ -242,6 +242,19 @@ int main() {
         }
 
         {
+            TFTrackGroupSliceTrackSlice &s2 = t.slices.create(99/*ticks*/);
+            s2.set_duration(99);
+
+            std::cout << "seq3.video1.track1: start " << s2.start << " end " << s2.end << " duration " << s2.duration << std::endl;
+
+            s2.set_end(199);
+
+            std::cout << "seq3.video1.track1: start " << s2.start << " end " << s2.end << " duration " << s2.duration << std::endl;
+
+            t.slices.set_start(t.slices.find(99), 80);
+        }
+
+        {
             t.slices.set_start(t.slices.find(0), 4);
             t.slices.set_start(t.slices.find(4), 5);
             TFTrackGroupSliceTrackSlice &s2 = t.slices[5];
@@ -261,7 +274,7 @@ int main() {
     }
     {
         TFTrackGroupSliceTrack &t = proj.sequences["seq3"].groups["video1"].slices[0].tracks["track1"];
-        for (unsigned long long c = 0;c < 30;c++) {
+        for (unsigned long long c = 0;c < 120;c++) {
             auto i = t.slices.rounddown_bound(c);
             if (i != t.slices.end()) {
                 std::cout << "slice rounddown_bound(" << c << ") " << i->first << " start " <<
