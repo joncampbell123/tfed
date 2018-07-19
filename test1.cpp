@@ -286,7 +286,37 @@ int main() {
             }
         }
 
+        for (auto &i : t.slices) {
+            std::cout << "slice " << i.first << " start " <<
+                i.second->start << " end " << i.second->end <<
+                " duration " << i.second->duration << std::endl;
+        }
+
         t.slices.check_overlap_validity();
+
+        for (auto &i : t.slices) {
+            std::cout << "slice " << i.first << " start " <<
+                i.second->start << " end " << i.second->end <<
+                " duration " << i.second->duration << std::endl;
+        }
+
+        {
+            proj.sequences["seq3"].groups["video1"].slices[0].tracks["track1"].slices[5].set_end(40);
+        }
+
+        for (auto &i : t.slices) {
+            std::cout << "slice " << i.first << " start " <<
+                i.second->start << " end " << i.second->end <<
+                " duration " << i.second->duration << std::endl;
+        }
+
+        t.slices.check_overlap_validity();
+
+        for (auto &i : t.slices) {
+            std::cout << "slice " << i.first << " start " <<
+                i.second->start << " end " << i.second->end <<
+                " duration " << i.second->duration << std::endl;
+        }
     }
  
     return 0;
