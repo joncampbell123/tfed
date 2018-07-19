@@ -8,6 +8,7 @@
 #include "tf_rational.h"
 #include "tf_audiodesc.h"
 #include "tf_videodesc.h"
+#include "tf_trackgroupslicetrack.h"
 
 class TFTrackGroupSliceList;
 
@@ -22,6 +23,8 @@ public:
     /* start-end in SECONDS. The slice covers start <= t < end. */
     long double                                 start = 0;/*start time, recomputed as needed from overall slice list and ticks*/
     long double                                 end = 0;/*end time, recomputed as needed from start + ticks*/
+public:
+    TFTrackGroupSliceTrackList                  tracks;
 public:
     TFULongRational                             rate;/*recomputed from get_rate, ticks per second*/
     /* overrides */
@@ -63,6 +66,12 @@ public:
     }
     long double duration(void) const {
         return ((long double)length * rate.den) / rate.num;
+    }
+    long double ticks2seconds(const long double &x) const {
+        return ((long double)x * rate.den) / rate.num;
+    }
+    long double seconds2ticks(const long double &x) const {
+        return ((long double)x * rate.num) / rate.den;
     }
 protected:
     friend class                                TFTrackGroupSliceList;
