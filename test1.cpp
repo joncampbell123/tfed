@@ -229,8 +229,9 @@ int main() {
         }
 
         {
-            const unsigned long long v = t.slices.set_start(t.slices.find(0), 4);
-            TFTrackGroupSliceTrackSlice &s2 = t.slices[v];
+            t.slices.set_start(t.slices.find(0), 4);
+            t.slices.set_start(t.slices.find(4), 5);
+            TFTrackGroupSliceTrackSlice &s2 = t.slices[5];
 
             std::cout << "seq3.video1.track1: start " << s2.start << " end " << s2.end << " duration " << s2.duration << std::endl;
         }
