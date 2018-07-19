@@ -26,6 +26,9 @@ protected:
     void set_rate(const TFULongRational &r) {
         rate = r;
     }
+    long double duration(void) const {
+        return ((long double)length * rate.den) / rate.num;
+    }
 public:
     friend class                                TFTrackGroupSlice;
     friend class                                TFTrackGroupSliceTrackList;
