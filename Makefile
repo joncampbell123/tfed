@@ -1,5 +1,5 @@
 TARGET=test1
-LIBS=tf_project.o tf_sequence.o tf_trackgrouping.o tf_trackgroup.o tf_rational.o
+LIBS=tf_rational.o
 
 CXXFLAGS=-std=gnu++11 -Wall -Wextra -pedantic
 LDFLAGS=
