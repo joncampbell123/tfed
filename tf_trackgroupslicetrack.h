@@ -18,7 +18,7 @@ public:
     virtual                                     ~TFTrackGroupSliceTrack() { };
 public:
     std::string                                 name;
-    unsigned long long                          length = 0;/*in ticks at rate*/
+    long double                                 length = 0;/*in ticks at rate*/
     TFULongRational                             rate;/*given by parent*/
 public:
     TFTrackGroupSliceTrackSliceList             slices;

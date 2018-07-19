@@ -18,7 +18,7 @@ public:
     virtual                                     ~TFTrackGroupSlice() { };
 public:
     size_t                                      index;
-    unsigned long long                          length = 0;/*in ticks at rate*/
+    long double                                 length = 0;/*in ticks at rate*/
 public:
     /* start-end in SECONDS. The slice covers start <= t < end. */
     long double                                 start = 0;/*start time, recomputed as needed from overall slice list and ticks*/
@@ -50,7 +50,7 @@ public:
         update_end_time();
         update_track_rates();
     }
-    void set_length(const unsigned long long &l) {
+    void set_length(const long double &l) {
         if (length != l) {
             length = l;
             update_end_time();
