@@ -77,30 +77,42 @@ public:
          * cross-transition code in this project is written around start-end
          * derived from the overlap of two slices that follow these rules. */
         for (auto i=begin();i!=end();i++) {
-            auto j = i; j++;
-            if (j == end()) break;
+            do {
+                auto j = i; j++;
+                if (j == end()) break;
 
-            /* i = current
-             * j = next */
+                /* i = current
+                 * j = next */
 
-            /* assume (due to std::map)
-             * - i->first != j->first (cannot occupy the same start)
-             * - i->first <  j->first (next item must have later start time) */
+                /* assume (due to std::map)
+                 * - i->first != j->first (cannot occupy the same start)
+                 * - i->first <  j->first (next item must have later start time) */
 
-            /* current end cannot extend past the next end */
-            /* i: +--------------------------+
-             * j:    +-----------------+ */
-            if (i->second->end > j->second->end) {
-                std::cerr << "check_overlap_validity: current end > next end, invalid" << std::endl;
-                i->second->end = j->second->end;
-
-                /* becomes */
-                /* i: +--------------------+
+                /* current end cannot extend past the next end */
+                /* i: +--------------------------+
                  * j:    +-----------------+ */
-            }
+                if (i->second->end > j->second->end) {
+                    std::cerr << "check_overlap_validity: curitem start=" << i->first <<
+                        " nextitem start=" << j->first <<
+                        " current end " << i->second->end <<
+                        " > next end " << j->second->end << ", trimming to " << j->second->end << std::endl;
+                    i->second->end = j->second->end;
 
-            /* assume by this point:
-             * - i->second->end <= j->second->end */
+                    /* becomes */
+                    /* i: +--------------------+
+                     * j:    +-----------------+ */
+
+                    /* and then go back and start again */
+                    i = begin();
+                    continue;
+                }
+
+                /* assume by this point:
+                 * - i->second->end <= j->second->end */
+
+                /* done */
+                break;
+            } while (1);
         }
     }
 };
