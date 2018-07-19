@@ -84,6 +84,7 @@ public:
                     break;
             } while (1);
 
+            i->second->set_start(x);
             rename(i->first, x);
         }
     }
