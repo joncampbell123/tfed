@@ -8,6 +8,13 @@ Schema:
     - Rational with whole number (integer)
 
   - Project [DONE]
+    - Assets (video, audio, generator resources)
+      - UUID identifier (as key)
+      - Type (audio, video, event list)
+      - Source (file, generator, etc)
+      - File path (if file)
+      - Generator object (TODO, how to specify?)
+      - Duration of asset (or recommended duration if generator)
     - Sequence(s) [DONE]
       - Track groupings [DONE]
         - Track groups to render [DONE]
@@ -26,6 +33,9 @@ Schema:
                 - Transformations/transitions/effects to apply to slices
                   - Envelope for each transformation
                 - Overlap envelope (to apply if ONE previous slice overlaps this one)
+                - Asset to render
+                - Start time within asset to render (long double type for precision)
+                - Playback speed (scalar against playback position after envelope)
               - Track envelope
               - Transformations/transitions/effects to apply to track
                 - Envelope for each transformation
