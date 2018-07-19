@@ -19,10 +19,28 @@ public:
     /* start-end in SECONDS. The slice covers start <= t < end. */
     long double                                 start = 0;/*start time, in ticks*/
     long double                                 end = 0;/*end time, in ticks*/
+    long double                                 duration = 0;/*duration, in ticks*/
 public:
-    long double duration(void) const {
+    long double get_duration(void) const {
         return end - start;
     }
+private:/*this requires cooperation with the list object*/
+    void set_start(const long double &x) {
+        start = x;
+        end = start + duration;
+    }
+public:
+    void set_end(const long double &x) {
+        end = x;
+        if (end < (start + min_duration)) end = (start + min_duration);
+        duration = end - start;
+    }
+    void set_duration(const long double &x) {
+        duration = std::max(x,min_duration); /* x cannot be less than min_duration */
+        end = start + duration;
+    }
+public:
+    const long double min_duration =            1e-3;
 public:
     friend class                                TFTrackGroupSliceTrackList;
 };
