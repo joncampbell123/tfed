@@ -16,36 +16,36 @@ public:
                                                 TFTrackGroupSliceTrackSlice(const long double &_start) : start(_start) { };
     virtual                                     ~TFTrackGroupSliceTrackSlice() { };
 public:
-    /* start-end in SECONDS. The slice covers start <= t < end. */
-    long double                                 start = 0;/*start time, in ticks*/
-    long double                                 end = 0;/*end time, in ticks*/
-    long double                                 duration = 0;/*duration, in ticks*/
+    /* start-end in ticks. The slice covers start <= t < end. */
+    unsigned long long                          start = 0;/*start time, in ticks*/
+    unsigned long long                          end = 0;/*end time, in ticks*/
+    unsigned long long                          duration = 0;/*duration, in ticks*/
 public:
-    long double get_duration(void) const {
+    unsigned long long get_duration(void) const {
         return end - start;
     }
 private:/*this requires cooperation with the list object*/
-    void set_start(const long double &x) {
+    void set_start(const unsigned long long &x) {
         start = x;
         end = start + duration;
     }
 public:
-    void set_end(const long double &x) {
+    void set_end(const unsigned long long &x) {
         end = x;
         if (end < (start + min_duration)) end = (start + min_duration);
         duration = end - start;
     }
-    void set_duration(const long double &x) {
+    void set_duration(const unsigned long long &x) {
         duration = std::max(x,min_duration); /* x cannot be less than min_duration */
         end = start + duration;
     }
 public:
-    const long double min_duration =            1e-3;
+    const unsigned long long min_duration =     1ull;
 public:
     friend class                                TFTrackGroupSliceTrackSliceList;
 };
 
-using TFTrackGroupSliceTrackSliceListBaseClass = TFMapWithRules< long double , TFTrackGroupSliceTrackSlice >;
+using TFTrackGroupSliceTrackSliceListBaseClass = TFMapWithRules< unsigned long long , TFTrackGroupSliceTrackSlice >;
 
 class TFTrackGroupSliceTrackSliceList : public TFTrackGroupSliceTrackSliceListBaseClass {
 public:
@@ -60,30 +60,9 @@ public:
         value.start = newname;
     }
 public:
-    long double set_start(ListIterator i,long double x) {
+    unsigned long long set_start(ListIterator i,unsigned long long x) {
         if (i == end()) throw std::runtime_error("set_start on end item");
         if (i->first != x) {
-            ListIterator j = find(x);
-            do {
-                if (j != end()) { x += 1e-100; j = find(x); }
-
-                long double tx = x;
-
-                if (j != end()) { x += 1e-99; j = find(x); }
-                if (j != end()) { x += 1e-97; j = find(x); }
-                if (j != end()) { x += 1e-81; j = find(x); }
-                if (j != end()) { x += 1e-56; j = find(x); }
-                if (j != end()) { x += 1e-33; j = find(x); }
-                if (j != end()) { x += 1e-15; j = find(x); }
-                if (j != end()) { x += 1e-8; j = find(x); }
-                if (j != end()) { x += 1e-3; j = find(x); }
-
-                if (j != end())
-                    x = tx;
-                else
-                    break;
-            } while (1);
-
             i->second->set_start(x);
             rename(i->first, x);
         }
