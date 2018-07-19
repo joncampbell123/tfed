@@ -108,6 +108,16 @@ public:
     ListIterator end(void) {
         return BaseType::end();
     }
+    ListIterator lower_bound(const KeyType &name) {
+        check_key_valid(name); /* throw exception if not */
+
+        return BaseType::lower_bound(name);
+    }
+    ListIterator upper_bound(const KeyType &name) {
+        check_key_valid(name); /* throw exception if not */
+
+        return BaseType::upper_bound(name);
+    }
 protected: /* the base class is protected */
 };
 
