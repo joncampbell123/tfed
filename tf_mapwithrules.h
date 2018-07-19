@@ -118,6 +118,17 @@ public:
 
         return BaseType::upper_bound(name);
     }
+    ListIterator rounddown_bound(const KeyType &name) {
+        check_key_valid(name); /* throw exception if not */
+
+        ListIterator i = BaseType::lower_bound(name);
+        if (i != BaseType::begin()) {
+            if (i == BaseType::end()) i--;
+            if (i->first > name) i--;
+        }
+
+        return i;
+    }
 protected: /* the base class is protected */
 };
 

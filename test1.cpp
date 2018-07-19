@@ -259,6 +259,20 @@ int main() {
                 " duration " << i.second->duration << std::endl;
         }
     }
+    {
+        TFTrackGroupSliceTrack &t = proj.sequences["seq3"].groups["video1"].slices[0].tracks["track1"];
+        for (unsigned long long c = 0;c < 30;c++) {
+            auto i = t.slices.rounddown_bound(c);
+            if (i != t.slices.end()) {
+                std::cout << "slice rounddown_bound(" << c << ") " << i->first << " start " <<
+                    i->second->start << " end " << i->second->end <<
+                    " duration " << i->second->duration << std::endl;
+            }
+            else {
+                std::cout << "slice rounddown_bound(" << c << ") end" << std::endl;
+            }
+        }
+    }
  
     return 0;
 }
