@@ -228,10 +228,9 @@ int main() {
             std::cout << "seq3.video1.track1: start " << s2.start << " end " << s2.end << " duration " << s2.duration << std::endl;
         }
 
-        t.slices.set_start(t.slices.find(0), 4);
-
         {
-            TFTrackGroupSliceTrackSlice &s2 = t.slices[4];
+            const long double v = t.slices.set_start(t.slices.find(0), 4);
+            TFTrackGroupSliceTrackSlice &s2 = t.slices[v];
 
             std::cout << "seq3.video1.track1: start " << s2.start << " end " << s2.end << " duration " << s2.duration << std::endl;
         }

@@ -60,7 +60,7 @@ public:
         value.start = newname;
     }
 public:
-    void set_start(ListIterator i,long double x) {
+    long double set_start(ListIterator i,long double x) {
         if (i == end()) throw std::runtime_error("set_start on end item");
         if (i->first != x) {
             ListIterator j = find(x);
@@ -87,6 +87,8 @@ public:
             i->second->set_start(x);
             rename(i->first, x);
         }
+
+        return x;
     }
 };
 
