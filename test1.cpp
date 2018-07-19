@@ -285,6 +285,8 @@ int main() {
                 std::cout << "slice rounddown_bound(" << c << ") end" << std::endl;
             }
         }
+
+        t.slices.check_overlap_validity();
     }
  
     return 0;

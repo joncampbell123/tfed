@@ -69,6 +69,40 @@ public:
 
         return x;
     }
+    virtual void check_overlap_validity(void) {
+        /* overlap rule:
+         *
+         * slices are only allowed to overlap one item to the right (later).
+         * the overlap cannot extend past the end of the next item.
+         * cross-transition code in this project is written around start-end
+         * derived from the overlap of two slices that follow these rules. */
+        for (auto i=begin();i!=end();i++) {
+            auto j = i; j++;
+            if (j == end()) break;
+
+            /* i = current
+             * j = next */
+
+            /* assume (due to std::map)
+             * - i->first != j->first (cannot occupy the same start)
+             * - i->first <  j->first (next item must have later start time) */
+
+            /* current end cannot extend past the next end */
+            /* i: +--------------------------+
+             * j:    +-----------------+ */
+            if (i->second->end > j->second->end) {
+                std::cerr << "check_overlap_validity: current end > next end, invalid" << std::endl;
+                i->second->end = j->second->end;
+
+                /* becomes */
+                /* i: +--------------------+
+                 * j:    +-----------------+ */
+            }
+
+            /* assume by this point:
+             * - i->second->end <= j->second->end */
+        }
+    }
 };
 
 #endif //TF_TRACKGROUPSLICETRACKSLICE_H
