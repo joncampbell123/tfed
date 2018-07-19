@@ -247,11 +247,11 @@ int main() {
 
             std::cout << "seq3.video1.track1: start " << s2.start << " end " << s2.end << " duration " << s2.duration << std::endl;
 
-            s2.set_end(199);
+            s2.set_end(109);
 
             std::cout << "seq3.video1.track1: start " << s2.start << " end " << s2.end << " duration " << s2.duration << std::endl;
 
-            t.slices.set_start(t.slices.find(99), 80);
+            t.slices.set_start(t.slices.find(99), 70);
         }
 
         {
