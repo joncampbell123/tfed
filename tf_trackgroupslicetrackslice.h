@@ -95,7 +95,7 @@ public:
                     std::cerr << "check_overlap_validity: curitem start=" << i->first <<
                         " nextitem start=" << j->first <<
                         " current end " << i->second->end <<
-                        " > next end " << j->second->end << ", trimming to " << j->second->end << std::endl;
+                        " > next end " << j->second->end << ", trimming current item end to " << j->second->end << std::endl;
                     i->second->end = j->second->end;
 
                     /* becomes */
@@ -109,6 +109,29 @@ public:
 
                 /* assume by this point:
                  * - i->second->end <= j->second->end */
+
+                /* advance */
+                j++;
+                if (j != end()) {
+                    /* i = current
+                     * j = next of next */
+
+                    /* current end cannot extend past the next, next start */
+                    /*      i: +-----------------------+
+                     * (next):     +-------------------+   (was clipped by code above)
+                     *      j:                 +---------------+ */
+                    if (i->second->end > j->first) {
+                        std::cerr << "check_overlap_validity: curitem start=" << i->first <<
+                            " nextnextitem start=" << j->first <<
+                            " current end " << i->second->end <<
+                            " > nextnext end " << j->second->end << ", trimming current item end to " << j->first << std::endl;
+                        i->second->end = j->first;
+
+                        /* and then go back and start again */
+                        i = begin();
+                        continue;
+                    }
+                }
 
                 /* done */
                 break;
