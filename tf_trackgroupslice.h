@@ -18,7 +18,7 @@ public:
     virtual                                     ~TFTrackGroupSlice() { };
 public:
     size_t                                      index;
-    long double                                 length = 0;/*in ticks, SECONDS*/
+    long double                                 length = 0;/*in ticks*/
 public:
     /* start-end in SECONDS. The slice covers start <= t < end. */
     long double                                 start = 0;/*start time, recomputed as needed from overall slice list and ticks*/
