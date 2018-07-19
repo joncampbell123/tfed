@@ -7,21 +7,21 @@ Schema:
   - Mixed fraction type
     - Rational with whole number (integer)
 
-  - Project
-    - Sequence(s)
-      - Track groupings
-        - Track groups to render
-      - Track group(s) (with track type Video, Audio, Event)
-        - Initial frame rate, interlace, aspect ratio, sample rate, etc.
-        - Track list (for display) by name
-        - Track group slice(s)
-          - Change frame rate, interlace, aspect ratio, sample rate, etc. for this slice
-            - Tracks by name
-              - Slices (media cuts, from a file, sequence, generator, etc)
+  - Project [DONE]
+    - Sequence(s) [DONE]
+      - Track groupings [DONE]
+        - Track groups to render [DONE]
+      - Track group(s) (with track type Video, Audio, Event) [DONE]
+        - Initial frame rate, interlace, aspect ratio, sample rate, etc. [DONE]
+        - Track list (for display) by name [DONE]
+        - Track group slice(s) [DONE]
+          - Change frame rate, interlace, aspect ratio, sample rate, etc. for this slice [DONE]
+            - Tracks by name [DONE]
+              - Slices (media cuts, from a file, sequence, generator, etc) [DONE]
                 - Slice start/end/duration in whole ticks only. Using floating point for map keys can open up a whole
-                  can of worms regarding floating point precision. No thanks.
-                - Start time of a slice is unique. Multiple slices cannot start at the same time on the same track
-                - Slice overlap is allowed only if two slices that partially overlap. Multiple overlaps not allowed
+                  can of worms regarding floating point precision. No thanks. [DONE]
+                - Start time of a slice is unique. Multiple slices cannot start at the same time on the same track [DONE]
+                - Slice overlap is allowed only if two slices that partially overlap. Multiple overlaps not allowed [DONE]
                 - Slice envelope
                 - Transformations/transitions/effects to apply to slices
                   - Envelope for each transformation
