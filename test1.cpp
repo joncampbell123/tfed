@@ -337,6 +337,16 @@ int main() {
                 i.second->start << " end " << i.second->end <<
                 " duration " << i.second->duration << std::endl;
         }
+ 
+        for (auto i=t.slices.begin();i!=t.slices.end();i++) {
+            auto j = i; j++;
+            if (j == t.slices.end()) break;
+
+            auto intersect = t.slices.get_overlap(*(i->second),*(j->second));
+
+            if (intersect.first != intersect.second)
+                std::cout << "intersection " << intersect.first << "-" << intersect.second << std::endl;
+        }
     }
  
     return 0;

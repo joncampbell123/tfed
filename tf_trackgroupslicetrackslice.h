@@ -69,6 +69,16 @@ public:
 
         return x;
     }
+    std::pair<unsigned long long,unsigned long long> get_overlap(const TFTrackGroupSliceTrackSlice &a,const TFTrackGroupSliceTrackSlice &b) const {
+        std::pair<unsigned long long,unsigned long long> r(0,0);
+
+        if (a.end > b.start) {
+            r.first = b.start;
+            r.second = a.end;
+        }
+
+        return r;
+    }
     virtual void check_overlap_validity(void) {
         /* overlap rule:
          *
