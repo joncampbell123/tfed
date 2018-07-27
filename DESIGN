@@ -8,8 +8,8 @@ Schema:
     - Rational with whole number (integer)
 
   - Project [DONE]
-    - Assets (video, audio, generator resources)
-      - UUID identifier (as key)
+    - Assets (video, audio, generator resources) [DONE]
+      - UUID identifier (as key) [DONE]
       - Type (audio, video, event list)
       - Source (file, generator, etc)
       - File path (if file)

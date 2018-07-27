@@ -23,7 +23,7 @@ public:
                                                 TFAsset(const std::string &_name = std::string()) : name(_name) { };
     virtual                                     ~TFAsset() { };
 public:
-    std::string                                 name;               // asset name (key to the list, used in tracks)
+    std::string                                 name;               // asset name (key to the list, used in tracks, usually a UUID)
     std::string                                 file_path;          // file path (if file)
     enum asset_type_t                           asset_type = ASSET_NULL;
 protected:
