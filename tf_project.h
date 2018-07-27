@@ -12,6 +12,7 @@ public:
                                                 TFProject(const std::string &_name = std::string()) : name(_name) { };
     virtual                                     ~TFProject() { };
 public:
+    TFAssetList                                 assets;
     TFSequenceList                              sequences;
     std::string                                 name;
 };
