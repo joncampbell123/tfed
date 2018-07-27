@@ -3,6 +3,7 @@
 #define TF_PROJECT_H
 
 #include "tf_sequence.h"
+#include "tf_asset.h"
 
 #include <string>
 
